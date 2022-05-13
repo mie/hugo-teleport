@@ -1,0 +1,41 @@
+{
+  "authors": [
+    {
+      "name": "John Doe",
+      "image": "",
+      "link": "https://twitter.com/johndoe"
+    },
+    {
+      "name": "John Doe",
+      "image": "",
+      "link": "https://twitter.com/johndoe"
+    },
+    {
+      "name": "John Doe",
+      "image": "",
+      "link": "https://twitter.com/johndoe"
+    }
+  ],
+  "social": [
+    {
+      "name": "Twitter",
+      "image": "",
+      "link": "https://twitter.com/"
+    },
+    {
+      "name": "Telegram",
+      "image": "",
+      "link": "https://telegram.me/"
+    },
+    {
+      "name": "Facebook",
+      "image": "",
+      "link": "https://facebook.com/"
+    },
+    {
+      "name": "Email",
+      "image": "",
+      "link": "feedback@example.com"
+    }
+  ]
+}

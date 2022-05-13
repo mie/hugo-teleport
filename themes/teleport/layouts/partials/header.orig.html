@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="canonical" href="{{ .Permalink }}">
+    {{ if .RSSLink }}
+      <link href="{{ .RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
+      <link href="{{ .RSSLink }}" rel="feed" type="application/rss+xml" title="{{ .Site.Title }}" />
+    {{ end }}
+    <link rel="stylesheet" type="text/css" href="/css/tachyons.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/colors.css">
+  </head>
+  <body class="w-100 h-100 overflow-x-hidden">
+    <div class="header center-ns w-100 {{ if .IsPage }}header-inverse{{ end }} pv3">
+      <div class="burger-container">
+        <div id="burger">
+          <div class="bar topBar"></div>
+          <div class="bar btmBar"></div>
+        </div>
+      </div>
+      <div class="icon icon-apple fl-ns">smlscr</div>
+      <ul class="menu tc-ns pv1 mv0 w-100">
+        <li class="menu-item dib-ns db mr4-ns pv2 pv0-ns"><a class="link dim f4 f5-ns" href="/">Главная</a></li>
+        <li class="menu-item dib-ns db mr4-ns pv2 pv0-ns"><a class="link dim f4 f5-ns" href="/roundup/">Раундапы</a></li>
+        <li class="menu-item dib-ns db mr4-ns pv2 pv0-ns"><a class="link dim f4 f5-ns" href="/feature/">Статьи</a></li>
+        <li class="menu-item dib-ns db mr4-ns pv2 pv0-ns"><a class="link dim f4 f5-ns" href="/schedule/">Расписание</a></li>
+        <li class="menu-item dib-ns db mr4-ns pv2 pv0-ns"><a class="link dim f4 f5-ns" href="/video/">Видео</a></li>
+        <li class="menu-item dib-ns db pv2 pv0-ns"><a class="link dim f4 f5-ns" href="/contacts/">Контакты</a></li>
+      </ul>
+      <div class="shop icon icon-bag"></div>
+    </div>
+    <main>

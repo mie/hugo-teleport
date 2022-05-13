@@ -1,0 +1,139 @@
+{{ define "main" }}
+<!-- <section class="cf pa3 mw9 center">
+  <header class="bb b--black-10 mt0 mb4 pa4 w-80-ns w-100">
+    <a class="f6 db gray dib no-underline ttu cherry b lato-bold" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+    <span class="f6 dib">&middot;</span>
+    <time class="f6 db gray dib">{{ .Lastmod.Format "Mon, Jan 2, 2006" }}</time>
+    <h1 class="f2 f1-ns lh-title lato-bold near-black measure-wide">{{ .Title }}</h1>
+    <p class="f3-ns f4 lh-copy mt0 mb4 measure gray">{{ .Params.subtitle }}</p>
+    <ul class="list pa0 dib mv0">
+      {{ range .Params.tags }}
+        <li class="dib mr1 mv0">
+          <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="f6 f5-ns b db pa0 link dim green">#{{ . }}</a>
+        </li>
+      {{ end }}
+    </ul>
+  </header>
+</section> -->
+<!-- <header class="bg-dark-violet sans-serif">
+  <div class="mw9 center pa4 pt5-ns ph7-l">
+    <a class="f6 db gray dib no-underline ttu cherry b lato-bold" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+    <span class="f6 dib">&middot;</span>
+    <time class="f6 db gray dib">{{ .Lastmod.Format "Mon, Jan 2, 2006" }}</time>
+    <h1 class="f2 f1-m f1-l measure-narrow lh-title mv0">
+      <span class="lh-title white pa1 tracked-tight">
+        {{ .Title }}
+      </span>
+    </h3>
+    <h4 class="f3 fw1 i measure-narrow">{{ .Params.subtitle }}</h4>
+    <h5 class="f6 ttu tracked black-80">By Adam Morse</h5>
+  </div>
+</header> -->
+<!-- <header>
+  <div class="aspect-ratio aspect-ratio--3x1-l aspect-ratio--2x1-m aspect-ratio--1x1">
+    <div class="aspect-ratio--object cover" style="background:url(/images/scr1.jpg) center;">
+      <div class="bg-near-black o-50 relative h-100 cf">
+      </div>
+      <div class="absolute bottom-0">
+        <div class="pa3 pv5-ns pl7-l pl4-m mws center white">
+          <a class="f6 db mv2 no-underline ttu lato-bold my-orange" href="/feature/">Feature</a>
+          <a href="#" class="di f1 lh-title mt0 lato-bold no-underline white">2017: Самые ожидаемые премьеры декабря</a>
+          <h5 class="f6 ttu tracked">By Adam Morse</h5>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</header> -->
+<!-- <header class="near-black">
+  <div class="mws center">
+    <div class="pb5 pb4-ns">
+      <div class="ph3 pt3 pb0">
+        <a class="f6 db gray dib no-underline ttu cherry b lato-bold" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+        <span class="f6 dib">&middot;</span>
+        <time class="f6 dib">{{ .Lastmod.Format "Mon, Jan 2, 2006" }}</time>
+        <h1 class="f2 f1-m f1-l measure-narrow lh-title">
+          <span class="lh-title pa1">
+            {{ .Title }}
+          </span>
+        </h1>
+        <img src="/images/{{ .Params.image }}" data-src="/images/scr1.jpg" >
+        <h4 class="f3-ns i f3 lh-copy lato-reg measure">{{ .Params.subtitle }}</h4>
+        <h5 class="f6 ttu tracked">By Adam Morse</h5>
+      </div>
+    </div>
+  </div> 
+</header> -->
+<section id="banner" class="flex items-end justify-center" style="background-image: url(/images/{{ .Params.image }});">
+  <div class="inner white">
+    <div class="pt3 pb0 ph3">
+      <h1 class="f3 f1-m f-subheadline-l measure-narrow lh-title">
+        <span class="lh-title pa1" style="text-shadow: 1px 1px 2px #000;">
+          {{ .Title }}
+        </span>
+      </h1>
+      <h4 class="f3-ns f4 lh-copy lato-reg measure db-ns dn">{{ .Params.subtitle }}</h4>
+      <p class="f6 ttu tracked">
+        <a class="no-underline cherry b lato-bold" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+        <span>&middot;</span>
+        <time>{{ .Lastmod.Format "Mon, Jan 2, 2006" }}</time>
+        <span>&middot;</span>
+        <span>By Adam Morse</span>
+      </p>
+    </div>
+  </div>
+</section>
+<section class="cf pa3 mws center">
+  <div class="flex flex-row items-start content-stretch" data-sticky-container>
+    <div class="w-100 w-10-ns pr4 pl2 pt3">
+      <div class="sticky">
+        {{ partial "share.html" . }}
+      </div>
+    </div>
+    <div class="w-100 w-60-ns">
+      <div class="f4-ns f5 lh-copy measure-wide lato-reg bp pb4 bb b--cherry" id="content">
+        {{ .Content }}
+      </div>
+      <div class="mt4 ">
+        <ul class="list pa0 dib mv0">
+          {{ range .Params.tags }}
+            <li class="dib mr1 mv0">
+              <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="f4 f3-ns b db pa2 link dim violet">#{{ . }}</a>
+              <!-- <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="f6 f5-ns b db pa0 link dim green">#{{ . }}</a> -->
+            </li>
+          {{ end }}
+        </ul>
+      </div>
+    </div>
+    <div class="violet w-100 w-30-ns sticky">
+      <div class="pl3-l" id="suggested">
+        <p class="near-black f2 dib lh-solid mh3 pb3 mb0 bb bw1 b--cherry">Популярное</p>
+        <div class="mt4 ph3">
+          {{ range first 5 .Site.Pages }}
+            <article class="ph0-ns pv3 bb bw1 b--light-gray">
+              <div>
+                <a class="f6 db no-underline ttu cherry b lato-bold mb2" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+                <a class="f4 db lh-title lato-bold near-black no-underline" href="{{ .Permalink }}">{{ .Title }}</a>
+                <!-- <div class="mb4 mb0-ns w-100 w-30-ns">
+                  <img src="/images/scr1.jpg" class="db" alt="Photo of a dimly lit room with a computer interface terminal.">
+                </div> -->
+              </div>
+            </article>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+    <!-- <div class="w-30-l w-100 pa2">
+      <p class="f2 lh-solid pa3 ph0-l tc">Популярное</p>
+      {{ range first 5 (.Site.Pages) }}
+        <article class="pa2 mv2">
+          <a class="f6 db gray dib no-underline ttu my-orange b lato-bold mb2" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+            &middot;
+          <time class="f6 db gray dib">{{ .Lastmod.Format "Mon, Jan 2, 2006" }}</time>
+          <a class="f3 db mt0 lh-title lato-bold near-black no-underline" href="{{ .Permalink }}">{{ .Title }}</a>
+        </article>
+      {{ end }}
+    </div> -->
+{{ end }}

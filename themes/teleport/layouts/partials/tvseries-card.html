@@ -1,0 +1,58 @@
+<div class="ph2 mt2 tile-column w-75-ns w-100 relative">
+  {{ range .tvseries }}
+    <!-- <div class="ph2 mt2 tile-column w-25-ns w-100 relative">
+      <article class="aspect-ratio aspect-ratio--8x5 aspect-ratio aspect-ratio--5x7-ns mb4">
+        {{ if gt (len .trailer) 0 }}
+          <div class="aspect-ratio--object cover" style="background:url(https://i.ytimg.com/vi/{{ .trailer }}/0.jpg) center;">
+        {{else}}
+          <div class="aspect-ratio--object cover" style="background:url(/images/thumbs/700x500-{{ .image }}) center;">
+        {{end}}
+          <div class="relative h-100 cf" style="background-image: linear-gradient(180deg, rgba(0,0,0,0) 0%, #111 100%);">
+          </div>
+          <div class="absolute bottom-0 pa2 pa3-l">
+            <a href="{{ .Permalink }}" class="db f3 f2-l lh-title mt0 b link white text-shadow hover-c2">{{.title}}</a>
+            <p class="fw1 f5 white lh-copy mb0 measure">{{ .title_ru }}
+            </p>
+          </div>
+        </div>
+      </article>
+    </div> -->
+    <article class="cf mb4 center flex-ns">
+      <div class="w-100 w-40-l">
+        <div class="aspect-ratio aspect-ratio--16x9 aspect-ratio">
+          {{ if gt (len .trailer) 0 }}
+            <!-- <div class="aspect-ratio--object cover" style="background:url(https://i.ytimg.com/vi/{{ .trailer }}/0.jpg) center;"> -->
+            <div class="aspect-ratio--object cover" style="background:url(/images/scr7.jpg) center;">
+            </div>
+            <div class="z-999 absolute flex justify-center items-center w-100 h-100">
+              <div class="w3 h3 br-100 bg-white o-60 pa3">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="#fff" stroke="#f5b316" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                  <path d="M10 30 L26 16 10 2 Z" />
+                </svg>
+              </div>
+          {{else}}
+            <div class="aspect-ratio--object cover" style="background:url(/images/thumbs/700x500-{{ .image }}) center;">
+          {{end}}
+          </div>
+        </div>
+      </div>
+      <div class="w-100 w-60-l ml3-l ph2 pt3 f3 measure">
+        <div class="mw6-ns pl2">
+          {{ if ne .tag nil}}
+            <a href="/tags/{{.tag}}" class="db f2-ns f3 lh-title lato b white no-underline near-black hover-c2">{{ .title }}</a>
+          {{ else }}
+            <span class="db f2-ns f3 lh-title b white">{{ .title }}</span>
+          {{ end }}
+          <span class="f3-ns f4 moon-gray db">{{ .title_ru }}</span>
+          <p class="f5 lh-copy moon-gray">
+            <span class='dib'>{{ .season }} сезон</span>
+            &middot;
+            <span class="dib">{{ .network }}</span>
+            &middot;
+            <span class="dib">{{ .genre }}</span>
+          </p>
+        </div>
+      </div>
+    </article>
+  {{ end }}
+</div>

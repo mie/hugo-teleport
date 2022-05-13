@@ -1,0 +1,85 @@
+{{ $last20 := first 20 (sort (where .Site.RegularPages "Section" "ne" "schedule") ".Params.date" "desc") }}
+{{ .Scratch.Set "final" slice }}
+{{ range $last20 }}
+  {{ range .Params.tags }}
+    {{ $has := (where ($.Scratch.Get "final") "name" "==" .) }}
+    {{ if eq (len $has) 0 }}
+      {{ $.Scratch.Add "final" ( dict "name" . "count" 1 ) }}
+    {{ else }}
+      {{ $tag := . }}
+      {{ $el := index $has 0 }}
+      {{ $val := $el.count }}
+      {{ $.Scratch.Set "tmp" slice }}
+      {{ range $.Scratch.Get "final"}}
+        {{ if ne .name $el.name }}
+          {{ $.Scratch.Add "tmp" . }}
+        {{ end }}
+      {{ end }}
+      {{ $.Scratch.Add "tmp" ( dict "name" $tag "count" (add $val 1) ) }}
+      {{ $.Scratch.Set "final" ($.Scratch.Get "tmp") }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ range first 1 (sort (.Scratch.Get "final") "count" "desc") }}
+  {{ $.Scratch.Set "name" .name }}
+  {{ $.Scratch.Set "img2" ""}}
+  {{ if eq $.IsHome false }}
+    {{ range first 1 ( shuffle $last20 ) }}
+      {{ $.Scratch.Set "name" (index (shuffle .Params.tags) 0) }}
+      {{ $.Scratch.Set "img2" (print "/images/thumbs/700x500-" .Params.image) }}
+    {{ end }}
+  {{ else }}
+    {{ range $key, $taxonomy := $.Site.Taxonomies.tags }}
+      {{ if eq $key ($.Scratch.Get "name") }}
+        {{ range first 1 (shuffle $taxonomy.Pages) }}
+          {{ $.Scratch.Set "img2" (print "/images/thumbs/700x500-" .Params.image) }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  {{ $page := $.Site.GetPage (print "tags/" ($.Scratch.Get "name")) }}
+  <article class="aspect-ratio aspect-ratio--8x5 aspect-ratio aspect-ratio--3x4-ns mb4">
+    {{ if ne $page nil }}
+      {{ $img := print "/images/" ( substr ( delimit ( split $page.RelPermalink "/" ) "-" ) 1 -1 ) ".jpg" }}
+      {{ if fileExists (print "/static"  $img) }}
+        <div class="aspect-ratio--object cover" style="background:url({{ $img | absURL }}) center;">
+      {{else}}
+        <!-- <div class="aspect-ratio--object cover" style="background-color: #5432d3"> -->
+        <div class="aspect-ratio--object cover" style="background:url({{ $.Scratch.Get "img2" | absURL }}) center;">
+      {{end}}
+    {{else}}
+      <!-- <div class="aspect-ratio--object cover" style="background-color: #5432d3"> -->
+      <div class="aspect-ratio--object cover" style="background:url({{ $.Scratch.Get "img2" | absURL }}) center;">
+    {{end}}
+      <div class="relative h-100 cf" style="background-image: linear-gradient(180deg, rgba(0,0,0,0) 0%, #111 100%);">
+      </div>
+      <div class="absolute bottom-0 pa2 pa3-l">
+        {{ if eq .IsHome true }}
+          <span class="f6 dib mv2 c1 tracked text-shadow">
+            <svg class="v-btm" viewBox="0 0 32 32" width="18" height="18" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+              <path d="M18 13 L26 2 8 13 14 19 6 30 24 19 Z"></path>
+            </svg>
+            <span>trending</span>
+          </span>
+        {{ end }}
+        <a href="/tags/{{ $.Scratch.Get "name" }}" class="db f3 f2-l lh-title mt0 b link white text-shadow hover-c2">
+          {{if and (ne $page nil) (ne $page.Params.title nil)}}
+            {{$page.Params.title}}
+          {{else}}
+            {{ $.Scratch.Get "name" }}
+          {{end}}</a> 
+        <p class="fw1 f5 white lh-copy mb0 measure">{{ .count }} 
+          {{ if findRE "(5|6|7|8|9|10|11|12|13|14)$" .count }}
+            материалов
+          {{ else }}
+            {{ if findRE "(2|3|4)$" .count }}
+              материала
+            {{ else }}
+              материал
+            {{ end }}
+          {{ end }}
+        </p>
+      </div>
+    </div>
+  </article>
+{{ end }}

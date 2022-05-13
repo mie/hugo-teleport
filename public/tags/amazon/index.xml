@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Amazon on Teleport</title>
+    <link>http://example.org/tags/amazon/</link>
+    <description>Recent content in Amazon on Teleport</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ru-ru</language>
+    <lastBuildDate>Sun, 19 Nov 2017 11:23:09 +0300</lastBuildDate>
+    
+	<atom:link href="http://example.org/tags/amazon/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>2018: Самые ожидаемые премьеры января</title>
+      <link>http://example.org/feature/2018-january-tv-review/</link>
+      <pubDate>Sun, 19 Nov 2017 11:23:09 +0300</pubDate>
+      
+      <guid>http://example.org/feature/2018-january-tv-review/</guid>
+      <description>Dillinger 
+Dillinger is a cloud-enabled, mobile-ready, offline-storage, AngularJS powered HTML5 Markdown editor.
+ Type some Markdown on the left See HTML in the right Magic  New Features!  Import a HTML file and watch it magically convert to Markdown Drag and drop images (requires your Dropbox account be linked)  You can also: - Import and save files from GitHub, Dropbox, Google Drive and One Drive - Drag and drop markdown and HTML files into Dillinger - Export documents as Markdown, HTML and PDF</description>
+    </item>
+    
+    <item>
+      <title>Телепорт от 19 декабря: Amazon отправляется в Средиземье</title>
+      <link>http://example.org/roundup/19-12-lord-of-the-rings/</link>
+      <pubDate>Sun, 19 Nov 2017 11:21:48 +0300</pubDate>
+      
+      <guid>http://example.org/roundup/19-12-lord-of-the-rings/</guid>
+      <description>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</description>
+    </item>
+    
+  </channel>
+</rss>

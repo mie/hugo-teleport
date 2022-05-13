@@ -1,0 +1,24 @@
+<div class="flex flex-column items-center gallery bg-white mt4">
+  <div class="w-100">
+    <p class="f2-ns f3 lh-title mb2">
+      <span class="c2 lato">Галерея</span>
+      <span class="">{{ .Get "title" }}</span>
+    </p>
+    <div class="mw4 mv2 bw1 bt b--c2"></div>
+    {{ $count := .Page.Scratch.Get "count" }}
+    <p class="f4-ns f5 gray mt0">{{ $count }}
+      {{ if findRE "(0|11|12|13|14|5|6|7|8|9)$" $count }}
+        фотографий
+      {{ else }}
+        {{ if findRE "(2|3|4)$" $count }}
+          фотографии
+        {{ else }}
+          фотография
+        {{ end }}
+      {{ end }}
+    </p>
+  </div>
+  <div class="w-100 overflow-x-auto flex flex-nowrap gallery">
+    {{ .Inner }}
+  </div>
+</div>

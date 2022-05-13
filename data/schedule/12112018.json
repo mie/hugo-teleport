@@ -1,0 +1,123 @@
+{
+  "schedule": [
+    {
+      "day": "15112018",
+      "tvseries": [
+        {
+          "title": "Game of Thrones",
+          "title_ru": "Игра престолов",
+          "season": "7",
+          "network": "HBO",
+          "genre": "Драма, Фэнтези",
+          "trailer": "DTY29Y7awfU",
+          "image": ""
+        },
+        {
+          "title": "Luther",
+          "title_ru": "Лютер",
+          "season": "5",
+          "network": "BBC One",
+          "genre": "Детектив, Триллер",
+          "trailer": "w3xCRLTOa0A",
+          "image": ""
+        },
+        {
+          "title": "Westworld",
+          "title_ru": "Мир Дикого Запада",
+          "tag": "westworld",
+          "season": "2",
+          "network": "HBO",
+          "genre": "Драма, Фэнтези",
+          "trailer": "DTY29Y7awfU",
+          "image": ""
+        },
+        {
+          "title": "Atlanta",
+          "title_ru": "Атланта",
+          "season": "2",
+          "network": "FX",
+          "genre": "Комедия",
+          "trailer": "w3xCRLTOa0A",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "day": "16112018",
+      "tvseries": [
+        {
+          "title": "The End of the F***ing World",
+          "title_ru": "Конец ***ного мира",
+          "season": "1",
+          "network": "Channel 4 / Netflix",
+          "genre": "Драма, Комедия",
+          "trailer": "2kdvdoWaoSU",
+          "image": ""
+        },
+        {
+          "title": "The Young Pope",
+          "title_ru": "Молодой папа",
+          "season": "2",
+          "network": "HBO / Sky Atlantic",
+          "genre": "Драма, Комедия",
+          "trailer": "Vagd59S8Aq8",
+          "image": ""
+        },
+        {
+          "title": "Terror",
+          "title_ru": "Террор",
+          "season": "1",
+          "network": "AMC",
+          "genre": "Драма",
+          "trailer": "DTY29Y7awfU",
+          "image": ""
+        },
+        {
+          "title": "Patrick Melrose",
+          "title_ru": "Патрик Мэлроуз",
+          "season": "1",
+          "network": "Showtime / Sky",
+          "genre": "Драма",
+          "trailer": "w3xCRLTOa0A",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "day": "17112018",
+      "tvseries": []
+    },
+    {
+      "day": "18112018",
+      "tvseries": [
+        {
+          "title": "Fear the Walking Dead",
+          "title_ru": "Бойтесь ходячих мертвецов",
+          "season": "4",
+          "network": "AMC",
+          "genre": "Драма, Фэнтези",
+          "trailer": "DTY29Y7awfU",
+          "image": ""
+        },
+        {
+          "title": "Picnic at Hanging Rock",
+          "title_ru": "Пикник у Висячей скалы",
+          "season": "1",
+          "network": "Amazon",
+          "genre": "Драма",
+          "trailer": "w3xCRLTOa0A",
+          "image": ""
+        },
+        {
+          "title": "The Rain",
+          "title_ru": "Дождь",
+          "season": "1",
+          "network": "Netflix",
+          "genre": "Фантастика",
+          "trailer": "DTY29Y7awfU",
+          "image": ""
+        }
+      ]
+    }
+  ]
+}

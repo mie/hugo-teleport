@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="canonical" href="{{ .Permalink }}">
+    {{ if .RSSLink }}
+      <link href="{{ .RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
+      <link href="{{ .RSSLink }}" rel="feed" type="application/rss+xml" title="{{ .Site.Title }}" />
+    {{ end }}
+    <link rel="stylesheet" type="text/css" href="/css/tachyons.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/colors.css">
+  </head>
+  <body class="w-100 h-100 overflow-x-hidden {{ if eq .Section "schedule" }}bg-c3{{ else if .IsPage }}bg-white{{else}}bg-c1{{ end }}">
+    <header class="center-ns w-100 pv3-ns pv0 bg-white {{if eq .Section "schedule"}}header-inverse{{ end }}">
+      <div class="mws center">
+        <div class="burger-container">
+          <div id="burger">
+            <div class="bar topBar"></div>
+            <div class="bar btmBar"></div>
+          </div>
+        </div>
+        <div class="icon fl-ns pv1 pv0-ns">
+          <a class="link" href="/">
+            <svg viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+              <path d="M30 8 L2 8 2 26 30 26 Z M20 8 C20 8 20 4 16 4 12 4 12 8 12 8 M8 26 L8 8 M24 26 L24 8"></path>
+            </svg>
+          </a>
+        </div>
+        <ul class='menu tc-ns pv1 mv0 w-100'>
+          {{ $currentPage := . }}
+          {{ range .Site.Menus.main }}
+            {{if ne .URL "/latest/"}}
+              <li class="menu-item dib-ns db mr4-ns pv2 pv0-ns"><a class="link f4 f5-ns pb3 hover-c2 {{if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }}active{{ end }}" href="{{ .URL }}">{{ .Name }}</a></li>            
+            {{end}}
+          {{ end }}
+        </ul>
+        <div class="shop icon icon-bag"></div>
+      </div>
+    </header>
+    <main>

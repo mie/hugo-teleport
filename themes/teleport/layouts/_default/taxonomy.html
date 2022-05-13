@@ -1,0 +1,20 @@
+{{ define "main" }}
+  {{ with .Content }}
+    <!-- {{ . }} -->
+  {{ end }}
+  <!-- {{ partial "banner.html" . }} -->
+  <section class="mw7 center mb4">
+    <div class="w-100 ph2 ph0-ns">
+      <p class="f2 dib lh-solid mh3 pv3">
+        <span>Материалы по тэгу </span>
+        <span class="c2 bb bw1 b--c2"># {{ if isset .Params "title" }}{{ .Params.title }}{{ else }}{{ .Title }}{{ end }}</span>
+      </p>
+      
+    <!-- <p class="f2 lh-solid pa3 ph0-l tc mv0-ns">{{ .Section }}</p> -->
+      {{ range (.Paginator 5).Pages }}
+        {{ partial "article-list-item.html" . }}
+      {{ end }}
+      {{ partial "paginator.html" . }}
+    </div>
+  </section>
+{{end}}

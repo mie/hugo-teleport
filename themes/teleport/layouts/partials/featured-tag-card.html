@@ -1,0 +1,14 @@
+<div class="mt2 ph2 tile-column w-25-ns w-100">
+  {{ $img := .Params.image }}
+  <div class="h-100 bg-white">
+    <div class='aspect-ratio aspect-ratio--16x9'>
+      <div class="aspect-ratio--object cover bg-center" style='background-image:url(/images/thumbs/350x250-{{ .Params.image }});'></div>
+    </div>
+    <div class="pa3">
+      <a class="f4 db mb1 lh-title b link near-black" href="{{ .Permalink }}">{{ .Title }}</a>
+      <a class="f5 gray dib link mb2 tracked c2" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+      <span class="gray f5">&middot;</span>
+      <time class="f5 gray">{{ .Lastmod.Format "Jan 2, 2006, 15:04" }}</time>
+    </div>
+  </div>
+</div>

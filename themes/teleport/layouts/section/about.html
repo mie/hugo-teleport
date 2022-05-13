@@ -1,0 +1,69 @@
+{{ define "main" }}
+  <section class="mws center mb4">
+    <div class="w-100">
+      <p class="f2 dib lh-solid mh3 pv3 bb bw1 b--c2">О проекте</p>
+    </div>
+    <div class="measure ph2 ph0-ns">
+      {{ with .Content }}
+        {{ . }}
+      {{ end }}
+    </div>
+  </section>
+  <section class="bg-c3 white">
+    <div class="mws center pv4 ph3 ph0-ns">
+      <div class="flex flex-row-ns flex-column">
+        <div class="w-25-ns w-100">
+          <p class="f3">Команда</p>
+          {{ range $.Site.Data.authors }}
+            {{ range .authors }}
+              <article class="w-100 pb2 mt2 flex flex-row items-center">
+                <div class="w2 w3-ns">
+                  <img src="{{ .image }}" class="ba b--c1 db br-100 w2 w3-ns h2 h3-ns"/>
+                </div>
+                <div class="pl3">
+                  <p class="f6 f5-ns fw7 lh-title white mv0">{{ .name }}</p>
+                  <a class="f6 link fw4 mt0 mb0 c2" href="{{ .link }}">@{{ index (last 1 (split .link "/")) 0 }}</a>
+                </div>
+              </article>
+            {{ end }}
+          {{ end }}
+        </div>
+        <div class="w-25-ns w-100">
+          <p class="f3">Мы в соцсетях</p>
+          {{ range $.Site.Data.authors }}
+            {{ range .social }}
+              <article class="dt w-100 pb2 mt2" href="#0">
+                <div class="dtc w2 w3-ns v-mid">
+                  <img src="{{ .image }}" class="ba b--c1 db br-100 w2 w3-ns h2 h3-ns"/>
+                </div>
+                <div class="dtc v-mid pl3">
+                  <p class="f6 f5-ns fw6 lh-title white mv0">{{ .name }}</p>
+                  <a class="f6 link fw4 mt0 mb0 c2" href="{{ .social }}">{{ index (last 1 (split .social "/")) 0 }}</a>
+                </div>
+                <!-- <div class="dtc v-mid">
+                  <form class="w-100 tr">
+                    <button class="f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60" type="submit">+ Follow</button>
+                  </form>
+                </div> -->
+              </article>
+            {{ end }}
+          {{ end }}
+        </div>
+        <div class="w-50-ns w-100">
+          <p class="f3">Обратная связь</p>
+          <!-- <label class="f5 b db mb1">Email</label>
+            <input class="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="name-desc" /> -->
+          <div class="mb2">
+            <label class="db fw4 lh-copy f6" for="email-address">Email</label>
+            <input class="pa2 input-reset ba w-100" type="email" name="email-address"  id="email-address">
+          </div>
+          <label class="f5 b db mb1">Текст сообщения</label>
+            <textarea class="pa2 input-reset ba w-100 h4 mb4"></textarea>
+          <a class="f3 link ph3 pv2 ba b--c2 bg-c2 white br-pill shadow hover-bg-c2" href="#">
+          Отправить
+          </a>
+        </div>
+      </div>      
+    </div>    
+  </section>
+{{end}}

@@ -1,0 +1,14 @@
+<article class="pv3 pv0-ns mb4-ns">
+  <a class="f3 b db mb1 lh-title link c4" href="{{ .Permalink }}">{{ .Title }}</a>
+  <a class="b f6 gray dib link mb2 tracked c2" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+  <span class="f6 gray">&middot;</span>
+  <time class="f6 gray">{{ .Lastmod.Format "Jan 2, 2006, 15:04" }}</time>
+</article>
+
+
+<!-- <article class="ph0-ns pv2">
+  <a class="f4 b db lh-title near-black link mb1" href="{{ .Permalink }}">{{ .Title }}</a>
+  <a class="f6 gray b dib link mb2 tracked c2" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+  <span class="f6 gray">/</span>
+  <time class="f6 gray">{{ .Lastmod.Format "Jan 2, 2006, 15:04" }}</time>
+</article> -->

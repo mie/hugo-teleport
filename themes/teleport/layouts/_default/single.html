@@ -1,0 +1,220 @@
+{{ define "main" }}
+<!-- {{ partial "spread.html" . }} -->
+
+
+<section class="mw8 center">
+  <div class="cf mt5 mt5-ns">
+    <div class="w-100 ph2 ph0-ns mb2">
+      <div class="ph4-m ph0-l">
+        <div class="tc">
+          <h1 class="db f1-l f2 lh-title lato-bold no-underline near-black">{{ .Title }}</h1>
+          <a class="f5 gray b dib no-underline mb2 c2" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+          <span class="f6 gray">&middot;</span>
+          <time class="f5 gray">{{ .Lastmod.Format "Jan 2, 2006, 15:04" }}</time>
+          <h5 class="f6 tracked mid-gray">Текст: {{ .Params.author }}</h5>
+          <div class="mw4 mv2 bw1 bt b--c2 center"></div>
+        </div>
+        <p class="f3-ns f4 center lato mid-gray lh-copy measure">{{ .Params.subtitle }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section>
+  <div class="aspect-ratio aspect-ratio--3x1-l aspect-ratio--2x1-m aspect-ratio--1x1">
+    <div class="aspect-ratio--object cover" style="background:url(/images/original/{{.Params.image}}) center;">
+      <div class="bg-near-black o-50 relative h-100 cf">
+      </div>
+      <div class="absolute bottom-0">
+        <div class="pa3 pv5-ns pl7-l pl4-m mws center white">
+          <a class="f6 db mv2 no-underline ttu b" href="/feature/">Feature</a>
+          <a href="#" class="di f1 lh-title mt0 b no-underline white text-shadow">2017: Самые ожидаемые премьеры декабря</a>
+          <h5 class="f6 ttu tracked">By Adam Morse</h5>          
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+<!-- <section class="cf pa3 mw9 center">
+  <header class="bb b--black-10 mt0 mb4 pa4 w-80-ns w-100">
+    <a class="f6 db gray dib no-underline ttu cherry b lato-bold" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+    <span class="f6 dib">&middot;</span>
+    <time class="f6 db gray dib">{{ .Lastmod.Format "Mon, Jan 2, 2006, 15:04" }}</time>
+    <h1 class="f2 f1-ns lh-title lato-bold near-black measure-wide">{{ .Title }}</h1>
+    <p class="f3-ns f4 lh-copy mt0 mb4 measure gray">{{ .Params.subtitle }}</p>
+    <ul class="list pa0 dib mv0">
+      {{ range .Params.tags }}
+        <li class="dib mr1 mv0">
+          <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="f6 f5-ns b db pa0 link dim green">#{{ . }}</a>
+        </li>
+      {{ end }}
+    </ul>
+  </header>
+</section> -->
+
+<!-- <header class="mws center">
+  <div class="mws center pa4 pt5-ns">
+    <div class="flex justify-between content-stretch">
+      <div class="w-25 db">
+        <div class="aspect-ratio aspect-ratio--9x16 h5 pb5">
+          <div class="aspect-ratio--object cover" style="background:url(/images/scr7.jpg) center;"></div>
+        </div>
+      </div>
+      <div class="w-75 pl3">
+        <a class="f6 db gray dib no-underline ttu cherry b lato-bold" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+        <span class="f6 dib">&middot;</span>
+        <time class="f6 db gray dib">{{ .Lastmod.Format "Mon, Jan 2, 2006, 15:04" }}</time>
+        <h1 class="f2 f1-m f1-l measure-narrow lh-title mv0">
+          <span class="lh-title near-black pa1 tracked-tight">
+            {{ .Title }}
+          </span>
+        </h3>
+        <h4 class="f3 fw1 measure-narrow">{{ .Params.subtitle }}</h4>
+        <h5 class="f6 ttu tracked black-80">By Adam Morse</h5>        
+      </div>
+    </div>
+  </div>
+</header> -->
+<!-- <section class="near-black">
+  <div class="mws center">
+    <div class="pb5 pb4-ns">
+      <div class="ph3 pt3 pb0">
+        <a class="f6 db gray dib no-underline ttu cherry b lato-bold" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+        <span class="f6 dib">&middot;</span>
+        <time class="f6 dib">{{ .Lastmod.Format "Mon, Jan 2, 2006, 15:04" }}</time>
+        <h1 class="f2 f1-m f1-l measure-narrow lh-title">
+          <span class="lh-title pa1">
+            {{ .Title }}
+          </span>
+        </h1>
+        <img src="/images/original/{{ .Params.image }}" data-src="/images/scr1.jpg" >
+        <h4 class="f3-ns i f3 lh-copy lato-reg measure">{{ .Params.subtitle }}</h4>
+        <h5 class="f6 ttu tracked">By Adam Morse</h5>
+      </div>
+    </div>
+  </div> 
+</section> -->
+<!-- {{ partial "spread.html" . }} -->
+<section class="cf pa3 mb3">
+  <div class="mw9 center flex flex-row-l flex-column items-center content-stretch" data-sticky-container>
+    <div class="w-100 w-75-l">
+      <div class="flex flex-row-ns flex-column" data-sticky-container>
+        <div class="w-100 w-10-m w-third-l pr4 pl2">
+          <div class="sticky-social pt2">
+            {{ partial "share.html" . }}
+          </div>
+        </div>
+        <div class="w-100 w-90-m w-two-thirds-l ph2 pt2">
+          <!-- <div class="aspect-ratio aspect-ratio--16x9">
+            <div class="aspect-ratio--object cover" style="background:url(/images/thumbs/960x480-{{ .Params.image }}) center;"></div>
+          </div> -->
+          <figure class="ma0">
+            <img class="db mw-100 center" src='/images/thumbs/960x480-{{ .Params.image }}' alt="{{ .Title }}" caption="{{ .Title }}">
+          </figure>
+          <div class="f4-ns f5 lh-copy center lato bp pv4 bb b--c2 bg-white center measure" id="content">
+            {{ .Content }}
+          </div>
+          <div class="f4-ns f5 measure center mt4">
+            <p class="f5 mid-gray">Сохранено под тэгами:
+              {{ range .Params.tags }}
+                {{ $tag := . }}
+                {{ $page := $.Site.GetPage (print "tags/" $tag) }}
+                {{ $has_title_tag := and (ne $page nil) ($page.Params.title) }}
+                <a class="link c2 hover-bg-c1 br-pill inline-flex items-center tc pv1" href='{{ "/tags/" | relURL }}{{ . | urlize }}' title="">
+                  <span class="f6 ph2{{ if not $has_title_tag }} ttc{{end}}">
+                    #{{ if $has_title_tag }}{{ $page.Params.title }}{{ else }}{{ $tag }}{{ end }}
+                  </span>
+                </a>
+              {{ end }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-100 w-25-l">
+      <div class="sticky ph3 ph1-ns pt3" id="suggested">
+        <div class="mw3 bw2 bt b--c2"></div>
+        <div class="ph0">
+          <p class="f2 b near-black">
+            Не пропустите
+          </p>
+        </div>
+        <div class="mt4">
+          <!-- {{ $latest := first 5 (where .Site.RegularPages.ByPublishDate ".Permalink" "ne" .Permalink) }} -->
+          {{ $bytags := first 5 (where (where (where .Site.RegularPages "Section" "ne" "schedule") ".Params.tags" "intersect" .Params.tags) ".Permalink" "ne" .Permalink) }}
+          {{ $trending := first 5 (where ((where .Site.RegularPages "Section" "ne" "schedule").ByParam "views7") ".Permalink" "ne" .Permalink) }}
+          {{ $top := first 5 (sort (shuffle (union  $bytags $trending)) ".Params.date" "desc") }}
+          {{ range $top }}
+            <article class="ph0-ns pv2 bb bw1 b--light-gray">
+              <!-- <a class="f6 db no-underline ttu c2 b lato-bold mb2" href="/{{ .Section | urlize }}/">{{ .Section }}</a> -->
+              <a class="f4 b db lh-title near-black link mb1" href="{{ .Permalink }}">{{ .Title }}</a>
+              <a class="f6 gray dib link mb2 tracked c2" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+              <span class="f6 gray">/</span>
+              <time class="f6 gray">{{ .Lastmod.Format "Jan 2, 2006, 15:04" }}</time>
+              <!-- <div class="mb4 mb0-ns w-100 w-30-ns">
+                <img src="/images/scr1.jpg" class="db" alt="Photo of a dimly lit room with a computer interface terminal.">
+              </div> -->
+              <!-- <div class="mw4 mv2 bw1 bb b--c2"></div> -->
+            </article>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="bg-c2 pb4">
+  <div class="mws center">
+    <div class="flex flex-wrap tile-row content-stretch">
+      <div class="ph2 mt2 tile-column w-25-ns w-100 relative pt4">
+        <div class="mw3 bw2 bt b--white"></div>
+        <div class="">
+          <p class="f2 b white">
+            Читайте далее
+          </p>
+        </div>
+      </div>
+      {{ $permalink := .Permalink }}
+      {{ .Scratch.Set "counter" 0 }}
+      {{ range first 9 (sort (where .Site.RegularPages "Section" "ne" "schedule") ".Params.date" "desc") }}
+        {{ if and (ne .Permalink $permalink) (lt ($.Scratch.Get "counter") 3 ) }}
+          <div class="mb4 mb0-ns mt2-ns ph2 tile-column w-25-ns w-100-m w-100">
+            <div class="h-100 bg-white relative {{ if eq .Section "roundup" }}bw2 bt b--c2{{ end }}">
+              {{ if eq .Section "feature" }}
+                <div class="aspect-ratio aspect-ratio--16x9">
+                  <div class="aspect-ratio--object cover" style="background:url(/images/thumbs/350x250-{{ .Params.image }}) center;"></div>
+                </div>
+              {{ end }}
+              <div class="pa3">
+                <a class="f4 db mb1 lh-title b link near-black" href="{{ .Permalink }}">{{ .Title }}</a>
+                <a class="f6 b dib link mb2 tracked c2" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+                <span class="f6 gray">&middot;</span>
+                <time class="f6 gray">{{ .Lastmod.Format "Jan 2, 2006, 15:04" }}</time>
+                {{ if eq .Section "roundup" }}
+                  <div class="mw4 mv2 bw1 bt b--c2"></div>
+                  <p class="f6 lh-copy mid-gray">
+                    {{ .Params.subtitle }}
+                  </p>
+                {{ end }}
+              </div>
+            </div>
+          </div>
+          {{ $.Scratch.Add "counter" 1 }}
+        {{ end }}
+      {{ end }}
+    </div>
+  </div>
+</section>
+    <!-- <div class="w-30-l w-100 pa2">
+      <p class="f2 lh-solid pa3 ph0-l tc">Популярное</p>
+      {{ range first 5 (.Site.Pages) }}
+        <article class="pa2 mv2">
+          <a class="f6 db gray dib no-underline ttu my-orange b lato-bold mb2" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+            &middot;
+          <time class="f6 db gray dib">{{ .Lastmod.Format "Mon, Jan 2, 2006, 15:04" }}</time>
+          <a class="f3 db mt0 lh-title lato-bold near-black no-underline" href="{{ .Permalink }}">{{ .Title }}</a>
+        </article>
+      {{ end }}
+    </div> -->
+{{ end }}

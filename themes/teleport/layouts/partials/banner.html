@@ -1,0 +1,51 @@
+{{if or (ne .Section "schedule") (ne .Section "schedule") }}
+  {{ $img := print "/images/" ( substr ( delimit ( split .RelPermalink "/" ) "-" ) 1 -1 ) ".jpg" }}
+  {{ if fileExists (print "/static"  $img) }}
+    <section id="banner" class="flex items-end justify-center" style="background-image: url({{ $img | absURL }});">
+  {{ else }}  
+    <section id="banner" class="flex items-end justify-center">
+  {{ end }}
+    <div class="inner white">
+      <div class="pt3 pb0 ph3">
+        {{ if .IsPage }}
+          <h1 class="f3 f1-ns measure-narrow lh-title">
+            <span class="lh-title pa1" style="text-shadow: 1px 1px 2px #000;">
+              {{ .Title }}
+            </span>
+          </h1>
+          <h4 class="f3-ns f4 lh-copy lato-reg measure db-ns dn">{{ .Params.subtitle }}</h4>
+          <p class="f6 ttu tracked">
+            <a class="no-underline cherry b lato-bold" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+            <span>&middot;</span>
+            <time>{{ .Lastmod.Format "Jan 2, 2006, 15:04" }}</time>
+            <span>&middot;</span>
+            <span>By Adam Morse</span>
+          </p>
+        {{ else}}
+          <h1 class="f3 f-subheadline-ns measure-narrow lh-title">
+            <span class="lh-title pa1" style="text-shadow: 1px 1px 2px #000;">
+              {{ if ne .Kind "taxonomy" }}{{ .Title }}{{ else }}Материалы по теме: {{ .Title }}{{ end }}
+            </span>
+          </h1>
+          <p class="f6 ttu tracked">
+            <span>{{ if eq (len .Data.Pages) 0 }}{{ len .Site.RegularPages }}{{ else }}{{ len .Data.Pages }}{{ end }} материал/а/ов</span>
+          </p>
+          <!-- <h4 class="f3-ns f4 lh-copy lato-reg measure db-ns dn">{{ .Params.subtitle }}</h4>
+          <p class="f6 ttu tracked">
+            <a class="no-underline cherry b lato-bold" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+            <span>&middot;</span>
+            <time>{{ .Lastmod.Format "Mon, Jan 2, 2006" }}</time>
+            <span>&middot;</span>
+            <span>By Adam Morse</span>
+          </p> -->
+        {{ end }}
+      </div>
+    </div>
+  </section>
+{{ else }}
+  <section class="mw7 center">
+    {{ with .Site.GetPage (print "roundup/" "24-12-sopranos.html") }}
+    {{ partial "article-list-item.html" . }}
+    {{ end }}
+  </section>
+{{ end }}

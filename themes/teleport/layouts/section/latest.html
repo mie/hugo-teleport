@@ -1,0 +1,19 @@
+{{ define "main" }}
+  {{ with .Content }}
+    {{ . }}
+  {{ end }}
+  <!-- {{ partial "banner.html" . }} -->
+  <section class="mw7 center mb4">
+    <div class="w-100">
+      <p class="f2 dib lh-solid pb3 mb0 c2 bb bw1 b--с2">Архив материалов</p>
+    <!-- <p class="f2 lh-solid pa3 ph0-l tc mv0-ns">{{ .Section }}</p> -->
+      {{ $paginator := .Paginate (where .Site.RegularPages "Section" "!=" "schedule") 5 }}
+      {{ range $paginator.Pages }}
+        <!-- {{ if .IsPage }} -->
+          {{ partial "article-list-item.html" . }}
+        <!-- {{ end }} -->
+      {{ end }}
+      {{ partial "paginator.html" . }}
+    </div>
+  </section>
+{{end}}

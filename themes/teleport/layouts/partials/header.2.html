@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="canonical" href="{{ .Permalink }}">
+    {{ if .RSSLink }}
+      <link href="{{ .RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
+      <link href="{{ .RSSLink }}" rel="feed" type="application/rss+xml" title="{{ .Site.Title }}" />
+    {{ end }}
+    <link rel="stylesheet" type="text/css" href="/css/tachyons.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/colors.css">
+  </head>
+  <body class="w-100 h-100 overflow-x-hidden">
+    {{ if .IsNode }}
+      {{ if .IsHome }}
+        {{ with .Site.GetPage "page" .Params.primary }}
+          <header class="header-home cover-ns bg-left-ns bg-top-l mb5" style="background-image: url(/images/{{ .Params.image }});">
+        {{ end }}
+      {{ else }}
+        {{ $img := print "/images/" ( substr ( delimit ( split .RelPermalink "/" ) "-" ) 1 -1 ) ".jpg" }}
+        {{ if fileExists (print "/static"  $img) }}
+          <header class="header-home cover-ns bg-left-ns bg-center-l mb5" style="background-image: url({{ $img | absURL }});">
+        {{ else }}
+          <header class="header-home cover-ns bg-left-ns bg-center-l mb5">
+        {{ end }}
+      {{ end }}
+        <div class="header center-ns w-100 mws white bg-black-50">
+          <div class="burger-container">
+            <div id="burger">
+              <div class="bar topBar"></div>
+              <div class="bar btmBar"></div>
+            </div>
+          </div>
+          <div class="fl-ns pv2">
+            <svg viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+              <path d="M30 8 L2 8 2 26 30 26 Z M20 8 C20 8 20 4 16 4 12 4 12 8 12 8 M8 26 L8 8 M24 26 L24 8"></path>
+            </svg>
+          </div>
+          <ul class="menu tc-ns mv0 w-100 pv3">
+            <li class="menu-item dib-ns db mr4-ns pv2 pv0-ns"><a class="pv3-ns link dim f4 f5-ns bb-ns b--cherry" href="/">Главная</a></li>
+            <li class="menu-item dib-ns db mr4-ns pv2 pv0-ns"><a class="pv3-ns link dim f4 f5-ns" href="/roundup/">Раундапы</a></li>
+            <li class="menu-item dib-ns db mr4-ns pv2 pv0-ns"><a class="pv3-ns link dim f4 f5-ns" href="/feature/">Статьи</a></li>
+            <li class="menu-item dib-ns db mr4-ns pv2 pv0-ns"><a class="pv3-ns link dim f4 f5-ns" href="/schedule/">Расписание</a></li>
+            <li class="menu-item dib-ns db mr4-ns pv2 pv0-ns"><a class="pv3-ns link dim f4 f5-ns" href="/video/">Видео</a></li>
+            <li class="menu-item dib-ns db pv2 pv0-ns"><a class="pv3-ns link dim f4 f5-ns" href="/contacts/">Контакты</a></li>
+          </ul>
+          <!-- <div class="shop icon icon-bag"></div> -->
+        </div>
+        <div class="bg-black-50 pb5 pb6-m pb5-l pv3">
+          <div class="mws center">
+            <div class="mt4 mt5-m mt5-l pv4">
+              {{ if .Params.primary }}
+                {{ with .Site.GetPage "page" .Params.primary }}
+                  <div class="mw6">
+                    <div class="white">
+                      <a class="f6 db gray dib no-underline ttc cherry b lato-reg mb2 tracked mr2" href="/{{ .Section | urlize }}/" style="text-shadow: 1px 1px 2px #000;">{{ .Section }}</a>
+                        &middot;
+                      <time class="f6 dib ml2 silver" style="text-shadow: 1px 1px 2px #000;">{{ .Lastmod.Format "Jan 2" }}</time>
+                    </div>
+                    <a class="f2-l f3 db lh-title lato-bold no-underline white mw6" href="{{ .Permalink }}" style="text-shadow: 1px 1px 2px #000;">{{ .Title }}</a>
+                    <!-- <p class="f6 db no-underline ttu white lato-reg tracked" style="text-shadow: 1px 1px 2px #000;">{{ .Params.author }}</p> -->
+                    <p class="f5 lh-copy lato-reg white measure" style="text-shadow: 1px 1px 2px #000;">
+                      {{ .Params.subtitle }}
+                    </p>
+                    <div class="flex justify-between items-center">
+                      <div class="dt mv4">
+                        <div class="dtc w2 v-mid">
+                          <img src="/images/art.jpg" class="db br-100 w2 h2"/>
+                        </div>
+                        <div class="dtc v-mid pl3">
+                          <span class="f6 db no-underline ttc white lato-reg tracked" style="text-shadow: 1px 1px 2px #000;">{{ .Params.author }}</h2>
+                        </div>
+                      </div>
+                      <!-- <div class="">
+                        <a href="{{ .Permalink }}" class="dt br-pill bg-cherry pv2 pr2 pl3 no-underline">
+                          <span class="dtc v-mid white tracked">Читать далее</span>
+                          <span class="dtc v-mid dim">
+                            <svg class="i-chevron-right" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                              <path d="M12 30 L24 16 12 2"></path>
+                            </svg>
+                          </span>
+                        </a>
+                      </div> -->
+                    </div>
+                  </div>
+                {{ end }}
+              <!-- { else if .IsPage }
+                <div class="mws center flex items-end">
+                  <div class="white mw7 pl4">
+                    <a class="f6 db gray dib no-underline ttc cherry b lato-reg mb2 tracked mr2" href="/{{ .Section | urlize }}/" style="text-shadow: 1px 1px 2px #000;">{{ .Section }}</a>
+                      &middot;
+                    <time class="f6 dib ml2 silver" style="text-shadow: 1px 1px 2px #000;">{{ .Lastmod.Format "Jan 2, 2006" }}</time>
+                    <h1 class="f1-l f2-m f3 dib lh-title lato-bold no-underline white" style="text-shadow: 1px 1px 2px #000;">{{ .Title }}</h1>
+                    <p class="f3-l f4 lh-copy lato-reg white measure" style="text-shadow: 1px 1px 2px #000;">
+                      {{ .Params.subtitle }}
+                    </p>
+                    <div class="flex justify-between items-center">
+                      <div class="dt mt4">
+                        <div class="dtc w2 v-mid">
+                          <img src="/images/art.jpg" class="db w2 h2"/>
+                        </div>
+                        <div class="dtc v-mid pl3">
+                          <span class="f6 db no-underline ttc silver lato-reg" style="text-shadow: 1px 1px 2px #000;">{{ .Params.author }}</h2>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+              {{ else }}
+                <h1 class="f3 f2-ns measure-narrow lh-title white">
+                  <span class="lh-title pa1" style="text-shadow: 1px 1px 2px #000;">
+                    {{ if ne .Kind "taxonomy" }}{{ .Title }}{{ else }}Материалы по теме: {{ .Title }}{{ end }}
+                  </span>
+                </h1>
+                <p class="f6 ttu tracked white">
+                  <span>{{ if eq (len .Data.Pages) 0 }}{{ len .Site.RegularPages }}{{ else }}{{ len .Data.Pages }}{{ end }} материал/а/ов</span>
+                </p>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      </header>
+    {{ else }}
+      <header class="header center-ns w-100 pv3-ns pv0">
+        <div class="burger-container">
+          <div id="burger">
+            <div class="bar topBar"></div>
+            <div class="bar btmBar"></div>
+          </div>
+        </div>
+        <div class="icon fl-ns pv1 pv0-ns">
+          <svg viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+            <path d="M30 8 L2 8 2 26 30 26 Z M20 8 C20 8 20 4 16 4 12 4 12 8 12 8 M8 26 L8 8 M24 26 L24 8"></path>
+          </svg>
+        </div>
+        <ul class="menu tc-ns pv1 mv0 w-100">
+          <li class="menu-item dib-ns db mr4-ns pv2 pv0-ns"><a class="link dim f4 f5-ns" href="/">Главная</a></li>
+          <li class="menu-item dib-ns db mr4-ns pv2 pv0-ns"><a class="link dim f4 f5-ns" href="/roundup/">Раундапы</a></li>
+          <li class="menu-item dib-ns db mr4-ns pv2 pv0-ns"><a class="link dim f4 f5-ns" href="/feature/">Статьи</a></li>
+          <li class="menu-item dib-ns db mr4-ns pv2 pv0-ns"><a class="link dim f4 f5-ns" href="/schedule/">Расписание</a></li>
+          <li class="menu-item dib-ns db mr4-ns pv2 pv0-ns"><a class="link dim f4 f5-ns" href="/video/">Видео</a></li>
+          <li class="menu-item dib-ns db pv2 pv0-ns"><a class="link dim f4 f5-ns" href="/contacts/">Контакты</a></li>
+        </ul>
+        <div class="shop icon icon-bag"></div>
+      </header>
+    {{ end }}
+    <main>

@@ -1,0 +1,61 @@
+{{ define "main" }}
+  <section class="bg-c3">
+    <div class="mr4 ml4 tc mws center white">
+      <p class="f2 lh-solid pa3 ph0-l lh-solid pt4 mv0">Премьеры недели</p>
+      <div class="f2 tc flex justify-center items-center">
+        {{ $current_mon:= index (first 1 (after 2 (split .RelPermalink "/"))) 0}}
+        {{ $monday := time (string (delimit (slice (substr $current_mon 4 4) (substr $current_mon 2 2) (substr $current_mon 0 2)) "-")) }}
+        {{ $sunday := $monday.AddDate 0 0 6 }}
+        {{ $prev_link := print (($monday.AddDate 0 0 -7).Format "02012006") }}
+        {{ $cur_link := print ($monday.Format "02012006") }}
+        {{ $next_link := print (($monday.AddDate 0 0 7).Format "02012006") }}
+        {{ if fileExists (print "/content/schedule/" $prev_link ".md") }}
+          {{ $page := .GetPage (print "/schedule/" $prev_link ".md") }}
+            <p>
+              <a href="{{ $page.Permalink }}" class="link mr4" id="left_page">
+                <svg viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                  <path d="M10 6 L2 16 10 26 M2 16 L30 16" />
+                </svg>
+              </a>
+            </p>
+        {{ end }}
+        <p class="date f2-ns f3">{{ $monday.Format "2" }} {{ index (slice "января" "февраля" "марта" "апреля" "мая" "июня" "июля" "августа" "сентября" "октября" "ноября" "декабря" ) (sub (int ($monday.Format "01" | strings.TrimLeft "0")) 1) }} - {{ $sunday.Format "2" }} {{ index (slice "января" "февраля" "марта" "апреля" "мая" "июня" "июля" "августа" "сентября" "октября" "ноября" "декабря" ) (sub (int ($sunday.Format "01" | strings.TrimLeft "0")) 1) }}</p>
+        {{ if fileExists (print "/content/schedule/" $next_link ".md") }}
+          {{ $page := .GetPage (print "/schedule/" $next_link ".md") }}
+            <a href="{{ $page.Permalink }}" class="link ml4" id="right_page">
+              <svg viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                <path d="M22 6 L30 16 22 26 M30 16 L2 16" />
+              </svg>
+            </a>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+  <section class="mw7 center pb4 bg-c3">
+    {{ $page := .GetPage (print "schedule/" $cur_link) }}
+    {{ if and $page (gt (len $page.Params.data_file) 0) }}
+      {{ range (getJSON "data/schedule/" $page.Params.data_file).schedule }}
+        {{ partial "schedule" . }}
+      {{ end }}
+    {{ end }}
+  </section>
+  {{ $p := .GetPage .Params.article }}
+  {{ if $p }}
+    <section class="mws center mv0">
+      <div class="flex flex-row-l flex-column">
+        <div class="ph2 mt4 w-25-l w-100 relative">
+          <div class="mw3 bw2 bt b--white"></div>
+          <div class="ph0 tl">
+            <p class="f2 white">
+              Подробнее о неделе
+            </p>
+          </div>
+        </div>
+        <div class="w-75-l w-100">
+          {{ partial "article-list-item" $p }}
+        </div>
+      </div>
+    </section>
+  {{ end }}
+
+{{end}}

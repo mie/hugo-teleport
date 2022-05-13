@@ -1,0 +1,12 @@
+{{ define "main" }}
+  <section class="mws center mb4">
+    <div class="w-100">
+      <p class="f2 dib lh-solid mh3 pv3 bb bw1 b--c2">Контакты</p>
+    </div>
+    <div class="measure ph2">
+      {{ with .Content }}
+        {{ . }}
+      {{ end }}
+    </div>
+  </section>  
+{{end}}

@@ -1,0 +1,61 @@
+{{ define "main" }}
+  {{ with .Content }}
+    {{ . }}
+  {{ end }}
+  <section class="mws center mb4">
+    <!-- <p class="f2 dib lh-solid pb3 mb0 c2 bb bw1 b--с2">{{ .Title }}</p> -->
+    <p class="f2 dib lh-solid mh3 pv3 bb bw1 b--c2">{{ .Title }}</p>
+    <!-- <div class="w-70 tile-row flex flex-wrap content-stretch pt4"> -->
+    <div class="w-100 flex flex-row-ns flex-column">
+      <div class="w-70-ns w-100 ph2 ph0-ns">
+        {{ range (.Paginator 5).Pages }}
+          {{ partial "article-list-item.html" . }}
+        {{ end }}
+        {{ partial "paginator.html" . }}
+      </div>
+      <div class="w-30-ns w-100 pl4-ns ph3 pr0-ns pl0 pt4-ns pt0">
+        <!-- <article class="cover bg-left bg-center-l br4 relative" style="background-image: url(/images/scr7.jpg); min-height: 400px;">
+          <div class="bg-black-60 h-100 pb5 pb6-m pv5-l br4">
+            <div class="ph3 absolute bottom-0">
+              <a class="f5 tracked dib mv2 link blood" href="/feature/">Сериал недели</a>
+              <p class="db f3 lh-title mt0 lato-bold link snow">Мир Дикого Запада</p>
+            </div>
+          </div>
+        </article> -->
+        {{ partial "featured-tag.html" . }}
+        
+        <!-- <div class="mw3 bw2 bt b--c2 mt3"></div>
+        <div class="ph3 ph0-ns">
+          <p class="f2 b near-black">
+            Читайте далее
+          </p>
+        </div> -->
+        <div class="mw3 bw2 bt b--c2"></div>
+        <div class="ph0">
+          <p class="f2 b near-black">
+            Читайте далее
+          </p>
+        </div>
+        <div class="mt4">
+          <!-- {{ $latest := first 5 (where .Site.RegularPages.ByPublishDate ".Permalink" "ne" .Permalink) }} -->
+          {{ $bytags := first 5 (where (where .Site.RegularPages ".Params.tags" "intersect" .Params.tags) ".Permalink" "ne" .Permalink) }}
+          {{ $trending := first 5 (where (.Site.RegularPages.ByParam "views7") ".Permalink" "ne" .Permalink) }}
+          {{ $top := first 5 (sort (shuffle (union  $bytags $trending)) ".Params.date" "desc") }}
+          {{ range $top }}
+            <article class="ph0-ns pv2">
+              <!-- <a class="f6 db no-underline ttu blood b lato-bold mb2" href="/{{ .Section | urlize }}/">{{ .Section }}</a> -->
+              <a class="f4 b db lh-title near-black link mb1" href="{{ .Permalink }}">{{ .Title }}</a>
+              <a class="f6 gray b dib link mb2 tracked c2" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+              <span class="f6 gray">&middot;</span>
+              <time class="f6 gray">{{ .Lastmod.Format "Jan 2, 2006, 15:04" }}</time>
+              <!-- <div class="mb4 mb0-ns w-100 w-30-ns">
+                <img src="/images/scr1.jpg" class="db" alt="Photo of a dimly lit room with a computer interface terminal.">
+              </div> -->
+              <!-- <div class="mw4 mv2 bw1 bb b--blood"></div> -->
+            </article>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </section>
+{{end}}

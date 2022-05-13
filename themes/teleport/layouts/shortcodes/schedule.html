@@ -1,0 +1,26 @@
+<h2>{{ .Get "title" }} / {{ .Get "title_ru" }}</h2>
+{{ if ne (.Get "trailer") ""}}
+	<section class="aspect-ratio aspect-ratio--6x4 mb2 yt-thumb" data-yt="{{ .Get ".trailer" }}" caption="Трейлер второго сезона Westworld">
+    <div class="aspect-ratio--object cover bg-black o-75" style="background:url('//img.youtube.com/vi/{{ .Get "trailer" }}/hqdefault.jpg') center;">
+    </div>
+    <div class="z-999 absolute flex justify-center items-center w-100 h-100">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+        <path d="M10 30 L26 16 10 2 Z" />
+      </svg>
+    </div>
+  </section>
+{{ else if ne (.Get "image") "" }}
+  <figure>
+    <img src="{{ .Get "image" }}">
+  </figure>
+{{ end }}
+<p class="lh-solid">Дата премьеры: <b>{{ .Get "day"}}</b></p>
+<p class="lh-solid">Сезон: <b>{{ .Get "season"}}</b></p>
+<p class="lh-solid">Жанр: <b>{{ .Get "genre"}}</b></p>
+<p class="lh-solid pb2">Телесеть: <b>{{ .Get "network"}}</b></p>
+{{ $description := .Inner | markdownify }}
+{{ if eq (len (findRE "<p>.+</p>" $description)) 0 }}
+  <p>{{ $description }}</p>
+{{ else }}
+  {{ $description }}
+{{ end }}

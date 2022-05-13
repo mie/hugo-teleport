@@ -1,0 +1,39 @@
+{{ .Scratch.Set "show" false }}
+{{ $days := slice "Mon" "Tue" "Wed" "Thu" "Fri" "Sat" "Sun" }}
+{{ $today := now.Format "Mon" }}
+{{ .Scratch.Set "pos" 0 }}
+{{ .Scratch.Set "done" false }}
+{{ range $days }}
+  {{ if ne ($.Scratch.Get "done") true }}
+    {{ if (ne . $today) }}
+      {{ $.Scratch.Set "pos" (add ($.Scratch.Get "pos") 1) }}
+    {{ else }}
+      {{ $.Scratch.Set "done" true }}
+    {{ end }}
+  {{ end }}          
+{{ end }}
+{{ $monday := now.AddDate 0 0 (int (mul -1 (.Scratch.Get "pos"))) }}
+{{ $cur_link := print ($monday.Format "02012006") }}
+{{ if fileExists (print "/content/schedule/"  $cur_link ".md") }}
+  {{ $page := .GetPage (print "/schedule/"  $cur_link ".md") }}
+  {{ range (getJSON "data/schedule/" $page.Params.data_file).schedule }}
+    {{ if and (eq (print (now.Format "02") (now.Format "01") (now.Format "2006")) .day) (ne (len .tvseries) 0) }}
+      {{ $.Scratch.Set "show" true }}
+    {{ end }}
+  {{ end }}
+  {{ if eq (.Scratch.Get "show") true}}
+    <section class="bg-c3 pb4">
+      <div class="mw7 center">
+        <div class="tc">
+          <p class="white f2 dib lh-solid pv3 bb bw1 b--c2">Премьеры дня</p>
+        </div>
+        {{ range (getJSON "data/schedule/" $page.Params.data_file).schedule }}
+          {{ if and (eq (print (now.Format "02") (now.Format "01") (now.Format "2006")) .day) (ne (len .tvseries) 0) }}
+            {{ partial "schedule.html" . }}
+          {{ end }}
+        {{ end }}
+      </div>
+    </section>
+  {{ end }}    
+{{ end }}
+

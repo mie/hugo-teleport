@@ -1,0 +1,21 @@
+<div class="mb4 mb0-ns mt2-ns ph2 tile-column w-25-ns w-100">
+  <div class="h-100 bg-white relative {{ if eq .Section "roundup" }}bw2 bt b--c2{{ end }}">
+    {{ if eq .Section "feature" }}
+      <div class="aspect-ratio aspect-ratio--16x9">
+        <div class="aspect-ratio--object cover" style="background:url(/images/thumbs/350x250-{{ .Params.image }}) center;"></div>
+      </div>
+    {{ end }}
+    <div class="pa3">
+      <a class="f4 db mb1 lh-title b link near-black" href="{{ .Permalink }}">{{ .Title }}</a>
+      <a class="f6 b dib link mb2 tracked c2" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+      <span class="f6 gray">&middot;</span>
+      <time class="f6 gray">{{ .Lastmod.Format "Jan 2, 2006, 15:04" }}</time>
+      {{ if eq .Section "roundup" }}
+        <div class="mw4 mv2 bw1 bt b--c2"></div>
+        <p class="f6 lh-copy mid-gray">
+          {{ .Params.subtitle }}
+        </p>
+      {{ end }}
+    </div>
+  </div>
+</div>

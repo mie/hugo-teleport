@@ -1,0 +1,20 @@
+{{ if (or (.Paginator.HasNext) (.Paginator.HasPrev)) }}
+  <div class="flex items-center justify-center pa4 paginator c1">
+    {{ if (.Paginator.HasPrev) }}
+      <a href="{{ .Paginator.Prev.URL }}" class="bg-c2 f4 link dim br-pill ba bw1 ph4 pv3 mb2 dib inline-flex items-center shadow hover-bg-c3 mr4">
+        <svg class="w1 v-btm" data-icon="chevronLeft" width="18" height="18" viewBox="0 0 32 32" style="fill:currentcolor">
+          <path d="M20 1 L24 5 L14 16 L24 27 L20 31 L6 16 z"></path>
+        </svg>
+        <span class="pl1">Позднее</span>
+      </a>
+    {{ end }}
+    {{ if (.Paginator.HasNext)}}
+      <a href="{{ .Paginator.Next.URL }}" class="bg-c2 f4 link br-pill ba bw1 ph4 pv3 mb2 dib inline-flex items-center shadow hover-bg-c3">
+        <span class="pr1">Раньше</span>
+        <svg class="w1 v-btm" data-icon="chevronRight" width="18" height="18" viewBox="0 0 32 32" style="fill:currentcolor">
+          <path d="M12 1 L26 16 L12 31 L8 27 L18 16 L8 5 z"></path>
+        </svg>
+      </a>
+    {{ end }}
+  </div>
+{{ end }}

@@ -1,0 +1,21 @@
+<section class="flex flex-column flex-row-l overflow-hidden relative 100vw" id="spread">
+  <div class="items-center justify-center h-100 w-50-l w-100 flex relative bg-c1">
+    <div class="pv3 pb0 ph3">
+      <div class="tc">
+        <h1 class="db f1-l f2 lh-title lato-bold no-underline near-black">{{ .Title }}</h1>
+        <a class="f5 gray dib no-underline mb2 tracked c2" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+        <span class="f5 gray">/</span>
+        <time class="f5 gray">{{ .Lastmod.Format "Jan 2, 2006, 15:04" }}</time>
+        <h5 class="f6 ttu tracked mid-gray">текст: {{ .Params.author }}</h5>
+        <div class="mw4 mv2 bw1 bt b--c2 center"></div>
+      </div>
+      <p class="f4-ns f5 center lato mid-gray lh-copy measure">{{ .Params.subtitle }}</p>
+    </div>
+  </div>
+  <div class="w-100 w-50-l w-100 h-100 db">
+    <div class="w-100 h-100 overflow-hidden ma0">
+      <div class="h-100 w-100 center mw-100 db cover bg-center" style="background-image:url(/images/original/{{ .Params.image }})">
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,19 @@
+<article class="cf mb4 mt4-ns center flex-ns bg-white">
+  <div class="w-100 w-40-l">
+    <div class="aspect-ratio aspect-ratio--16x9 aspect-ratio aspect-ratio--4x3-ns">
+      <div class="aspect-ratio--object cover" style="background:url(/images/thumbs/960x480-{{ .Params.image }}) center;"></div>
+    </div>
+  </div>
+  <div class="w-100 w-60-l ml3-l ph2 pt3 f3 measure">
+    <div class="mw6-ns pl2">
+      <a href="{{ .Permalink }}" class="db f3-ns f4 lh-title lato b blck no-underline near-black hover-c2">{{ .Title }}</a>
+      <a class="f6 gray b dib no-underline mb2 tracked c2" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+      <span class="f6 gray">&middot;</span>
+      <time class="f6 gray">{{ .Lastmod.Format "Jan 2, 2006, 15:04" }}</time>
+      <div class="mw4 mv2 bw1 bt b--c2"></div>
+      <p class="f5 lh-copy mid-gray measure pt-serif">
+        {{ .Params.subtitle }}
+      </p>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,54 @@
+{{ if gt (len .tvseries) 0 }}
+  <div class="schedule-row">
+    <div class="flex flex-column flex-row-ns mw8 center">
+      <div class="w-10-ns w-20-m pt4-ns b--moon-gray">
+        <div class="tc pt2">
+          <span class="f2 white br3 ba bw1 b--c2 bg-c2 di ph1">{{ substr .day 0 2 }}</span>
+          <span class="f5 white mt2 tc db">{{ index (slice "января" "февраля" "марта" "апреля" "мая" "июня" "июля" "августа" "сентября" "октября" "ноября" "декабря") (sub (int ((substr .day 2 2) | strings.TrimLeft "0" )) 1) }}</span>
+          <!-- <div class="db ml-auto mr-auto mw3 mv2 bw1 bt b--c2"></div> -->
+        </div>
+      </div>
+      <div class="w-90-ns w-80-m ph4 pt4 flex flex-wrap">
+        {{ if eq (len .tvseries) 0 }}
+          <div class="fl w-100 w-50-ns dt-ns mb3 tc tl-ns">
+            <span class="f3 b db mb1 white">Нет премьер</span>
+          </div>
+        {{ else }}
+          {{ range .tvseries }}
+            <div class="w-100 w-100-ns mb3 flex-ns flex-row-ns items-start-ns">
+              <div class="w5-ns w-100 db tc mb2 mb0-ns">
+                {{ if gt (len .trailer) 0 }}
+                  <img class="yt-thumb" src="https://i.ytimg.com/vi/{{ .trailer }}/0.jpg" data-yt="{{ .trailer }}">
+                  <!-- <div class="aspect-ratio aspect-ratio--7x5">
+                    <div class="aspect-ratio--object cover" style="background:url(/images/default.jpg) center;" data-yt="{{ .trailer }}"></div>
+                  </div> -->
+                  <!-- <img src="/images/default.jpg" "> -->
+                {{ else }}
+                  <img src="/images/thumbs/350x250-{{ .image }}" data-src="/images/original/{{ .image }}">
+                {{ end }}
+              </div>
+              <div class="ph3-ns ph0 w-100 pt3-ns">
+                <p class="lh-solid mv0 pt1">
+                  {{ if ne .tag nil}}
+                    <a href="/tags/{{.tag}}" class="link f3-ns f4 b dib mb1 white">{{ .title }}</a>
+                  {{ else }}
+                    <span class="f3-ns f4 b dib mb1 white">{{ .title }}</span>
+                  {{ end }}
+                  <span class="f3-ns f4 light-gray dib mh1">&middot;</span>
+                  <span class="f3-ns f4 light-gray dib">{{ .title_ru }}</span>
+                </p>
+                <p class="f5 lh-copy light-gray">
+                  <span class='dib'>{{ .season }} сезон</span>
+                  &middot;
+                  <span class="dib">{{ .network }}</span>
+                  &middot;
+                  <span class="dib">{{ .genre }}</span>
+                </p>
+              </div>
+            </div>
+          {{ end }}
+        {{ end }}
+      </div>
+    </div>
+  </div>
+{{ end }}

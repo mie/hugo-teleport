@@ -1,0 +1,39 @@
+{{ range .schedule}}
+  <div class="schedule-row">
+    <div class="flex flex-column flex-row-ns mws pv4 center">
+      <div class="fl w-10-ns w-20-m pt4">
+        <p class="f2 lh-solid tc silver mv0">{{ .day }}</p>
+      </div>
+      <div class="fl w-90-ns w-80-m ph4 pt4 flex flex-wrap">
+        {{ range .tvseries }}
+          <div class="fl w-100 w-50-ns dt-ns mb3">
+            <div class="dtc-ns db tc w4-ns">
+              {{ if gt (len .trailer) 0 }}
+                <!-- <img src="https://i.ytimg.com/vi/{{ .trailer }}/0.jpg" data-yt="{{ .trailer }}"> -->
+                <div class="aspect-ratio aspect-ratio--7x5">
+                  <div class="aspect-ratio--object cover" style="background:url(/images/default.jpg) center;" data-yt="{{ .trailer }}"></div>
+                </div>
+                <!-- <img src="/images/default.jpg" "> -->
+              {{ else }}
+                <img src="/images/thumbs/350x250-{{ .image }}" data-src="/images/original/{{ .image }}">
+              {{ end }}
+            </div>
+            <div class="dtc-ns ph3 v-top">
+              <p class="lh-solid mv0 pt1">
+                <span class="f3 near-black">{{ .title }}</span>
+                <span class="f4 mid-gray db">{{ .title_ru }}</span>
+              </p>
+              <p class="f5 lh-copy gray">
+                <span class='dib {{ if eq .season "1" }}blood{{ end }}'>{{ .season }} сезон</span>
+                &middot;
+                <span class="dib">{{ .network }}</span>
+                &middot;
+                <span class="dib">{{ .genre }}</span>
+              </p>
+            </div>
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+{{ end }}

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Starz on Teleport</title>
+    <link>https://brave-kilby-53f1eb.netlify.com/tags/starz/</link>
+    <description>Recent content in Starz on Teleport</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ru-ru</language>
+    <lastBuildDate>Mon, 03 Dec 2018 16:14:19 +0400</lastBuildDate>
+    
+	<atom:link href="https://brave-kilby-53f1eb.netlify.com/tags/starz/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>2017: Самые ожидаемые премьеры декабря</title>
+      <link>https://brave-kilby-53f1eb.netlify.com/feature/2017-december-tv-review/</link>
+      <pubDate>Mon, 03 Dec 2018 16:14:19 +0400</pubDate>
+      
+      <guid>https://brave-kilby-53f1eb.netlify.com/feature/2017-december-tv-review/</guid>
+      <description>Hey! I&amp;rsquo;m your first Markdown document in StackEdit. Don&amp;rsquo;t delete me, I&amp;rsquo;m very helpful! I can be recovered anyway in the Utils tab of the  Settings dialog.
+  StackEdit &amp;laquo;Stores &amp;laquo;Hello&amp;raquo; You&amp;raquo; your documents in your browser, which means all your documents are automatically saved locally and are accessible offline!
+ Note:
+ StackEdit is accessible offline after the application has been loaded for the first time. Your local documents are not shared between different browsers or computers.</description>
+    </item>
+    
+    <item>
+      <title>2018: Самые ожидаемые премьеры января</title>
+      <link>https://brave-kilby-53f1eb.netlify.com/feature/2018-january-tv-review/</link>
+      <pubDate>Mon, 03 Dec 2018 16:13:25 +0400</pubDate>
+      
+      <guid>https://brave-kilby-53f1eb.netlify.com/feature/2018-january-tv-review/</guid>
+      <description>Dillinger 
+Dillinger is a cloud-enabled, mobile-ready, offline-storage, AngularJS powered HTML5 Markdown editor.
+ Type some Markdown on the left See HTML in the right Magic  New Features!  Import a HTML file and watch it magically convert to Markdown Drag and drop images (requires your Dropbox account be linked)  You can also: - Import and save files from GitHub, Dropbox, Google Drive and One Drive - Drag and drop markdown and HTML files into Dillinger - Export documents as Markdown, HTML and PDF</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,47 @@
+baseURL = "https://brave-kilby-53f1eb.netlify.com/"
+languageCode = "ru-ru"
+title = "Teleport"
+theme = "teleport"
+publishDir = "public"
+
+sectionPagesMenu = "main"
+
+[menu]
+
+  [[menu.main]]
+    identifier = ""
+    name = "Главная"
+    pre = ""
+    weight = 1
+    url = "/"
+
+  [[menu.main]]
+    name = "Статьи"
+    pre = ""
+    weight = 2
+    identifier = "feature"
+    url = "/feature/"
+
+  [[menu.main]]
+    name = "Раундапы"
+    pre = ""
+    weight = 3
+    identifier = "roundup"
+    url = "/roundup/"
+
+  [[menu.main]]
+    name = "Расписание"
+    pre = ""
+    weight = 4
+    identifier = "schedule"
+    url = "/schedule/"
+
+  [[menu.main]]
+    name = "О проекте"
+    pre = ""
+    weight = 5
+    identifier = "about"
+    url = "/about/"
+
+[taxonomies]
+  tag = "tags"

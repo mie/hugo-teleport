@@ -1,0 +1,161 @@
+{{ partial "header.html" . }}
+{{ $featured := sort (where (where .Site.RegularPages "Section" "ne" "schedule") ".Params.featured" "==" true) ".Params.date" "asc" }}
+{{ .Scratch.Set "featured" . }}
+<section class="mws center ph0 mb0 pt3 pt0-ns pb4">
+  <div class="cf mb4 mt4-ns center flex-ns items-center-ns bg-white">
+    {{ range first 1 $featured }}
+      {{ .Scratch.Set "featured" . }}
+      <div class="fl w-100 w-50-l">
+        <div class="aspect-ratio aspect-ratio--16x9">
+          <div class="aspect-ratio--object cover" style="background:url(/images/thumbs/960x480-{{ .Params.image }}) center;"></div>
+        </div>
+      </div>
+      <div class="fl w-100 w-50-l ml4-l ph2 f3 measure mb4 mb2-ns">
+        <div class="mw6-ns pl2 pt2 pt0-ns">
+          <a href="{{ .Permalink }}" class="db f2-ns f3 lh-title b link near-black">{{ .Title }}</a>
+          <a class="f6 b dib link mb2 tracked c2" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+          <span class="f6 gray">&middot;</span>
+          <time class="f6 gray">{{ .Lastmod.Format "Jan 2, 2006, 15:04" }}</time>
+          <div class="mw4 mv2 bw1 bt b--c2"></div>
+          <p class="f5 lh-copy mid-gray measure">
+            {{ .Params.subtitle }}
+          </p>
+        </div>
+      </div>
+    {{ end }}
+  </div>
+  <div class="flex flex-wrap-ns flex-column flex-row-ns tile-row content-stretch">
+    {{ range (first 4 (after 1 $featured)) }}
+      {{ partial "article-tile-item.html" . }}
+    {{ end }}
+  </div>
+</section>
+{{ partial "subscribe-form-alt.html" . }}
+<section>
+  <div class="mws center mb4 flex flex-row-ns flex-column">
+    <div class="w-70-ns w-100 pb4 pb0-ns pr4-ns">
+      {{ range first 5 (sort (where .Site.RegularPages ".Params.featured" "==" false) ".Params.date" "desc") }}
+        {{ partial "article-list-item.html" . }}
+      {{ end }}
+      <div class="tc pv3">
+        <a class="f3 link ph4 pv3 bg-c2 white br-pill shadow hover-bg-c3" href="/latest/">
+          Все материалы
+          <svg class="v-mid" viewBox="0 0 32 32" width="24" height="24" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+            <path d="M22 6 L30 16 22 26 M30 16 L2 16"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="w-30-ns w-100 ph3 pt4-ns">
+      {{ partial "featured-tag.html" . }}
+      <div class="mw3 bw2 bt b--c2"></div>
+        <div class="ph0">
+          <p class="f2 b near-black">
+            Популярное за 
+            <span class="c2">неделю</span>
+          </p>
+        </div>
+        {{ range first 5 (sort (where .Site.RegularPages "Section" "ne" "schedule") ".Params.views7" "desc") }}
+          {{ partial "simple-article-list-item.html" . }}
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+<!-- {{ partial "subscribe-form.html" . }} -->
+{{ if ne .Params.featuredVideo nil }}
+  {{ $tag := $.Site.GetPage (print "/tags/" .Params.featuredVideo.tag ) }}
+  <section class="bg-white">
+    <div class="mws center pb4">
+      <div class="w-100 w-60-ns pt-serif">
+        <p class="f2 dib lh-solid mh3 pv3 bb bw1 b--c2">{{ .Params.featuredVideo.pre_tag }}
+          <a class="link c2 b" href="{{ $tag.Permalink }}">{{ $tag.Title}}</a>
+        </p>
+      </div>
+      <div class="flex-ns content-stretch ph3 pt3">
+        <div class="w-100 w-50-l">
+          <div class="aspect-ratio pt4 overflow-hidden" style="padding-bottom: 54%;">
+            <iframe src="//www.youtube.com/embed/{{ .Params.featuredVideo.youtube }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" allowfullscreen="" frameborder="0"></iframe>
+          </div>
+          <p class="f3 b mb0 lato">{{ .Params.featuredVideo.title }}</p>
+          <!-- <p class="f6 mt2 lato gray mb2">Mar 13, 2018</p> -->
+        </div>
+        <div class="w-100 w-50-l pl4-ns">
+          {{ range first 4 (where (where .Site.RegularPages "Section" "ne" "schedule") "Params.tags" "intersect" (slice .Params.featuredVideo.tag)) }}
+            {{ partial "simple-article-list-item.html" . }}
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </section>
+{{ end }}
+<section class="pv4 bg-c1">
+  <div class="mws center">
+    <div class="flex flex-wrap tile-row content-stretch mb4">
+      {{ $randomtag := index (shuffle .Params.featuredTags) 0 }}
+      {{ $ftag := .Site.GetPage (print "tags/" $randomtag.tag) }}
+      <div class="ph2 mt2 tile-column w-25-ns w-100 relative">
+        <div class="mw3 bw2 bt b--c2"></div>
+        <div class="ph0">
+          <p class="f2 near-black">
+            {{ $randomtag.title }} 
+            <a href="/tags/{{$randomtag.tag}}" class="link c2">{{if ne $ftag nil}}{{ $ftag.Params.title }}{{else}}{{$randomtag}}{{end}}</a>
+          </p>
+        </div>
+      </div>
+      {{ range first 3 (sort (where (where .Site.RegularPages "Section" "ne" "schedule") ".Params.tags" "intersect" (slice $randomtag.tag)) ".Params.date" "desc") }}
+        
+        {{ partial "article-tile-item.html" . }}
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+
+
+<!-- <section class="bg-c2">
+  <div class="mws center">
+    <p class="white f2 dib lh-solid pv3 bb bw1 b--c3">Свежее видео</p>
+    <div class="cf pa3 pa4-m center flex flex-row items-stretch-ns tile-row">
+      <div class="w-100 w-50-l pv2">
+        <div class="ph0">
+          <div class="aspect-ratio aspect-ratio--16x9">
+            <div class="aspect-ratio--object cover" style="background:url(/images/scr7.jpg) center;"></div>
+          </div>
+          <div>
+            <a class="f3 db lh-title b link near-white mt2" href="#">Трейлер второго сезона Westworld</a>
+            <p class="f5 lh-copy near-white measure">
+              Долгожданные первые официальные кадры грандиозной фантастики от HBO, впервые представленные в рекламном блоке на трансляции Super Bowl
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="w-100 w-50-l">
+        {{ range first 2 (.Site.Pages) }}
+          <article class="pl3-ns pv2 h-50 flex flex-column flex-row-ns">
+            <div class="w-100 w-50-l pl4-ns ">
+              <div class="aspect-ratio aspect-ratio--16x9">
+                <div class="aspect-ratio--object cover" style="background:url(/images/ww.png) center;"></div>
+              </div>
+              <div>
+                <a class="f5 db lh-title b link near-white" href="#">Трейлер второго сезона Westworld</a>
+              </div>
+            </div>
+            <div class="w-100 w-50-l pl4-ns ">
+              <div class="aspect-ratio aspect-ratio--16x9">
+                <div class="aspect-ratio--object cover" style="background:url(/images/scr1.jpg) center;"></div>
+              </div>
+              <div>
+                <a class="f5 db lh-title b link near-white" href="#">Трейлер Детективного агентства Дирка Джентли от BBC Two</a>
+              </div>
+            </div>
+          </article>
+        {{ end }}
+      </div>
+    </div>
+</div>
+</section> -->
+
+
+{{ partial "index-schedule" . }}
+{{ partial "footer.html" . }}

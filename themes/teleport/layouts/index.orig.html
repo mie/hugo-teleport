@@ -1,0 +1,848 @@
+{{ partial "header.html" . }}
+<!-- <section>
+  {{ if .Params.primary }}
+    {{ with .Site.GetPage "page" .Params.primary }}
+      <div class="cover-ns bg-left-ns bg-top-l mb4" style="background-image: url(/images/{{ .Params.image }});">
+        <div class="bg-black-50 pb5 pb6-m pb5-l pv3">
+          <div class="mws center">
+            <div class="mt4 mt5-m mt5-l pv4">
+              <div class="mw6">
+                <div class="snow">
+                  <a class="f6 db gray dib link blood b lato-reg mb2 tracked mr2" href="/{{ .Section | urlize }}/" style="text-shadow: 1px 1px 2px #000;">Вопросы и ответы</a>
+                    &middot;
+                  <time class="f6 dib ml2 silver" style="text-shadow: 1px 1px 2px #000;">{{ .Lastmod.Format "Jan 2" }}</time>
+                </div>
+                <a class="f2-l f3 lh-title b link snow mw6" href="{{ .Permalink }}" style="text-shadow: 1px 1px 2px #000;">{{ .Title }}</a>
+                <p class="f5 lh-copy lato-reg snow measure" style="text-shadow: 1px 1px 2px #000;">
+                  {{ .Params.subtitle }}
+                </p>
+                <div class="flex justify-between items-center">
+                  <div class="dt mv4">
+                    <div class="dtc w2 v-mid">
+                      <img src="/images/art.jpg" class="db br-100 w2 h2"/>
+                    </div>
+                    <div class="dtc v-mid pl3">
+                      <span class="f6 db link ttc snow lato-reg tracked" style="text-shadow: 1px 1px 2px #000;">{{ .Params.author }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{ end }}
+  {{ end }}
+</section> -->
+{{ $featured := sort (where .Site.RegularPages ".Params.featured" "==" true) ".Params.date" "desc" }}
+{{ .Scratch.Set "featured" . }}
+<section class="mws center ph0 mb0 pt3 pt0-ns">
+  <div class="cf mb4 mt4-ns center flex-ns items-center-ns bg-white">
+    {{ range first 1 $featured }}
+      {{ .Scratch.Set "featured" . }}
+      <div class="fl w-100 w-50-l">
+        <div class="aspect-ratio aspect-ratio--16x9">
+          <div class="aspect-ratio--object cover" style="background:url(/images/thumbs/960x480-{{ .Params.image }}) center;"></div>
+        </div>
+      </div>
+      <div class="fl w-100 w-50-l ml4-l ph2 f3 measure mb4 mb2-ns">
+        <div class="mw6-ns pl2 pt2 pt0-ns">
+          <a href="{{ .Permalink }}" class="db f2-ns f3 lh-title b link near-black">{{ .Title }}</a>
+          <a class="f6 b dib link mb2 tracked blood" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+          <span class="f6 gray">&middot;</span>
+          <time class="f6 gray">{{ .Lastmod.Format "Jan 2, 2006" }}</time>
+          <div class="mw4 mv2 bw1 bt b--blood"></div>
+          <p class="f5 lh-copy mid-gray measure">
+            {{ .Params.subtitle }}
+          </p>
+        </div>
+      </div>
+    {{ end }}
+  </div>
+<!--   <div class="flex flex-row-ns flex-column flex-wrap content-stretch justify-between-ns">
+    {{ range first 7 (.Site.RegularPages) }}
+      <div class="mt2 w-100 w-22-ns bg-snow mb4 {{ if eq .Section "roundup" }}br3 bw2 bg-near-snow bt b--blood{{ end }}">
+        <div class="aspect-ratio aspect-ratio--16x9">
+          <div class="aspect-ratio--object cover" style="background:url(/images/{{ .Params.image }}) center;"></div>
+        </div>
+        <div class="mt3 ph3">
+          <a class="f4 db mb1 lh-title b link blck" href="{{ .Permalink }}">{{ .Title }}</a>
+          <a class="f6 gray dib link mb2 tracked blood" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+          <span class="gray f6">/</span>
+          <time class="f6 gray">{{ .Lastmod.Format "Jan 2, 2006" }}</time>
+          <div class="mw4 mv2 bw1 bt b--blood"></div>
+          <p class="f6 lh-copy lato mid-gray">
+            {{ .Params.subtitle }}
+          </p>
+        </div>
+      </div>
+    {{ end }}
+    <div class="ph3 w-100 w-22-ns bg-snow tc mb4">
+      <p class="f2-ns f3 blck mb3">
+        Самые свежие новости про 
+        <span class="blood di">SXSW</span>
+      </p>
+      <div class="mw4 mb3 bw1 bt b--blood center"></div>
+      <div class="f6 gray tracked pb4">
+        <a class="link gray" href="/tags/sxsw/">Всего</a>
+        <span>{{ len (index .Site.Taxonomies.tags "preview").Pages }}</span>
+        <span>материалов</span>
+      </div>
+    </div>
+  </div> -->
+  <div class="flex flex-wrap-ns flex-column flex-row-ns tile-row content-stretch">
+    {{ range (first 4 (after 1 $featured)) }}
+      <div class="mb4 mb0-ns mt2-ns ph2 tile-column w-25-ns w-100">
+        <div class="h-100 bg-white relative {{ if eq .Section "roundup" }}bw2 bt b--blood{{ end }}">
+          {{ if eq .Section "feature" }}
+            <div class="aspect-ratio aspect-ratio--16x9">
+              <div class="aspect-ratio--object cover" style="background:url(/images/thumbs/350x250-{{ .Params.image }}) center;"></div>
+            </div>
+          {{ end }}
+          <div class="pa3">
+            <a class="f4 db mb1 lh-title b link near-black" href="{{ .Permalink }}">{{ .Title }}</a>
+            <a class="f6 b dib link mb2 tracked blood" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+            <span class="f6 gray">&middot;</span>
+            <time class="f6 gray">{{ .Lastmod.Format "Jan 2, 2006" }}</time>
+            {{ if eq .Section "roundup" }}
+              <div class="mw4 mv2 bw1 bt b--blood"></div>
+              <p class="f6 lh-copy mid-gray">
+                {{ .Params.subtitle }}
+              </p>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    {{ end }}
+    <!-- <div class="mt2 ph2 tile-column w-50">
+      <div class="h-100 tc flex items-center bg-white">
+        <div class="ph2a4">
+          <p class="f2-ns f3 mb3 mt0 lh-title near-black">
+            Самые свежие новости про 
+            <span class="di b blood">SXSW</span>
+          </p>
+          <div class="mw4 mb3 bw1 bt b--blood center"></div>
+          <div class="f6 mid-gray tracked pb4">
+            <a class="link" href="/tags/sxsw/">Всего</a>
+            <span>{{ len (index .Site.Taxonomies.tags "preview").Pages }}</span>
+            <span>материалов</span>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</section>
+<section>
+  <!-- <div class="mws center">
+    <div class="flex flex-wrap-ns flex-column flex-row-ns tile-row content-stretch">
+      {{ $page := .Site.GetPage "taxonomyTerm" "tags" "hbo" }}
+      {{ $pages := union (slice $page) (first 6 (sort (where .Site.RegularPages ".Permalink" "ne" ((.Scratch.Get "featured").Permalink) ) ".Params.date" "desc")) }}
+      {{ range (shuffle $pages) }}
+        <div class="ph2 tile-column w-25-ns w-100">
+          {{ if ne .Kind "taxonomy" }}
+            <div class="h-100 bg-white relative {{ if eq .Section "roundup" }}bw2 bt b--blood{{ end }}">
+              {{ if eq .Section "feature" }}
+                <div class="aspect-ratio aspect-ratio--8x5">
+                  <div class="aspect-ratio--object cover" style="background:url(/images/thumbs/350x250-{{ .Params.image }}) center;"></div>
+                </div>
+              {{ end }}
+              <div class="pa3">
+                <a class="f4 db mb1 lh-title b link near-black" href="{{ .Permalink }}">{{ .Title }}</a>
+                <a class="f6 b dib link mb2 tracked blood" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+                <span class="f6 gray">&middot;</span>
+                <time class="f6 gray">{{ .Lastmod.Format "Jan 2, 2006" }}</time>
+                {{ if eq .Section "roundup" }}
+                  <div class="mw4 mv2 bw1 bt b--blood"></div>
+                  <p class="f6 lh-copy mid-gray">
+                    {{ .Params.subtitle }}
+                  </p>
+                {{ end }}
+              </div>
+            </div>
+          {{ else }}
+            <article class="h-100">
+              {{ $img := print "/images/thumbs/320x640-" ( substr ( delimit ( split .RelPermalink "/" ) "-" ) 1 -1 ) ".jpg" }}
+              {{ if fileExists (print "/static"  $img) }}
+                <div class="h-100 cover relative" style="background:url({{ $img }}) center;">
+              {{ else }}
+                <div class="h-100 cover relative" style="background:url(/images/thumbs/320x640-scr1.jpg) center;">
+              {{ end }}
+                <div class="relative h-100 cf" style="background-image: linear-gradient(180deg, rgba(0,0,0,0) 0%, #111 100%);">
+                </div>
+                <div class="absolute bottom-0 pa2 pa3-l">
+                  <a class="f6 dib mv2 link snow tracked text-shadow" href="{{ .Permalink }}">
+                    <svg class="v-btm" viewBox="0 0 32 32" width="18" height="18" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                      <path d="M18 13 L26 2 8 13 14 19 6 30 24 19 Z"></path>
+                    </svg>
+                    <span>trending</span>
+                  </a>
+                  <a href="{{ .Permalink }}" class="db f3 f2-l lh-title mt0 b link white text-shadow">{{ .Title }}</a>
+                  <p class="fw1 f5 white lh-copy mb0 measure">{{ len .Pages }}
+                  {{ $s := string (len .Pages) }}
+                  {{ if findRE "(5|6|7|8|9|10|11|12|13|14)$" $s }}
+                    материалов
+                  {{ else }}
+                    {{ if findRE "(2|3|4)$" $s }}
+                      материала
+                    {{ else }}
+                      материал
+                    {{ end }}
+                  {{ end }}
+                  </p>
+                </div>
+              </div>
+            </article>
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+  </div> -->
+  <div class="mws center mb4 flex flex-row-ns flex-column">
+    <div class="w-70-ns w-100">
+      {{ range first 5 (sort (where .Site.RegularPages ".Params.featured" "==" false) ".Params.date" "desc") }}
+        {{ partial "article-list-item.html" . }}
+      {{ end }}
+    </div>
+    <div class="w-30-ns w-100 pl4-ns pt4-ns">
+      <!-- <article class="aspect-ratio aspect-ratio--8x5 aspect-ratio aspect-ratio--3x4-ns mb4">
+        <div class="aspect-ratio--object cover" style="background:url(/images/scr1.jpg) center;">
+          <div class="relative h-100 cf" style="background-image: linear-gradient(180deg, rgba(0,0,0,0) 0%, #111 100%);">
+          </div>
+          <div class="absolute bottom-0 pa2 pa3-l">
+            <a class="f6 dib mv2 link snow tracked text-shadow" href="/#/">
+              <svg class="v-btm" viewBox="0 0 32 32" width="18" height="18" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                <path d="M18 13 L26 2 8 13 14 19 6 30 24 19 Z"></path>
+              </svg>
+              <span>trending</span>
+            </a>
+            <a href="{{ .Permalink }}" class="db f3 f2-l lh-title mt0 b link white text-shadow">Детективное агентство Дирка Джентли</a>
+            <p class="fw1 f5 white lh-copy mb0 measure">14 материалов</p>
+          </div>
+        </div>
+      </article> -->
+      <!-- {{ .Scratch.Set "toptags" slice }}
+      {{ range $key, $value := (first 3 .Site.Taxonomies.tags.ByCount) }}
+        {{ $tag := $.Site.GetPage "taxonomyTerm" "tags" $value.Name }}
+        {{ $.Scratch.Add "toptags" (slice $tag.Params.title) }}              
+      {{ end }}
+      {{ $toptags := .Scratch.Get "toptags" }} -->
+      {{ partial "featured-tag.html" . }}
+
+      <!-- <ul>
+        {{ range $key, $value := .Site.Taxonomies.tags.ByCount }}
+          <li><a href="/tags/{{ $value.Name | urlize }}"> {{ $value.Name }} </a> {{ $value.Count }} </li>
+        {{ end }}
+      </ul> -->
+      <div class="mw3 bw2 bt b--blood"></div>
+        <div class="ph3 ph0-ns">
+          <p class="f2 b near-black">
+            Популярное за 
+            <span class="blood">неделю</a>
+          </p>
+        </div>
+      {{ range first 5 (sort .Site.RegularPages ".Params.views7" "desc") }}
+        <article class="pv3 pv0-ns mb4-ns">
+          <a class="f4 b db mb1 lh-title link" style="color:#474747" href="{{ .Permalink }}">{{ .Title }}</a>
+          <a class="f5 gray dib link mb2 tracked blood" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+          <span class="gray f5">/</span>
+          <time class="f5 gray">{{ .Lastmod.Format "Jan 2, 2006" }}</time>
+          <!-- <div class="mw4 mv2 bw1 bt b--blood"></div> -->
+        </article>
+      {{ end }}
+        <!-- <article class="pl2 pr3 mb3">
+          <div class="flex flex-column flex-row-ns">
+            <div class="w-100">
+              <time class="f6 db dib">{{ .Lastmod.Format "Jan 2, 2006" }}</time>
+              &middot;
+              <a class="f6 db gray dib link ttu blood b lato-bold mv2" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+              <a class="f3 db mt0 mb4 lh-title lato-bold link near-black" href="{{ .Permalink }}">{{ .Title }}</a>
+            </div>
+          </div>
+        </article> -->
+    </div>
+  </div>
+</section>
+          <!-- <div class="absolute bg-blood bottom-0 right-0">
+            <span class="tracked f7 snow ttu pa1">спойлеры</span>
+          </div> -->
+<section class="pv4 bg-snow bt bw1 b--blood">
+  <div class="mws center">
+    <div class="flex flex-wrap tile-row content-stretch mb4">
+      {{ $randomtag := index (shuffle .Params.featuredTags) 0 }}
+      {{ $ftag := .Site.GetPage "taxonomyTerm" "tags" $randomtag }}
+      <div class="ph2 mt2 tile-column w-25-ns w-100 relative">
+        <!-- <article class="cover bg-left bg-center-l h-100 br4" style="background-image: url(/images/scr7.jpg)">
+          <div class="bg-black-60 pb5 pb6-m pv5-l h-100 br4">
+            <div class="ph3 absolute bottom-0">
+              <a class="f5 tracked dib mv2 link blood" href="/feature/">Сериал недели</a>
+              <p class="db f3 lh-title mt0 lato-bold link snow">Мир Дикого Запада</p>
+            </div>
+          </div>
+        </article>  -->
+        <div class="mw3 bw2 bt b--blood"></div>
+        <div class="ph3 ph0-ns">
+          <p class="f2 near-black">
+            Обзоры новых сериалов от 
+            <a href="/tags/hbo" class="link blood">{{if ne $ftag nil}}{{ $ftag.Params.title }}{{else}}{{$randomtag}}{{end}}</a>
+          </p>
+        </div>
+      </div>
+      {{ range first 3 (sort (where .Site.RegularPages ".Params.tags" "intersect" (slice $randomtag)) ".Params.date" "desc") }}
+        <div class="mt2 ph2 tile-column w-25-ns w-100">
+          {{ $img := .Params.image }}
+          <div class="h-100 bg-white">
+            <div class='aspect-ratio aspect-ratio--16x9'>
+              <div class="aspect-ratio--object cover bg-center" style='background-image:url(/images/thumbs/350x250-{{ .Params.image }});'></div>
+            </div>
+            <div class="pa3">
+              <a class="f4 db mb1 lh-title b link blck" href="{{ .Permalink }}">{{ .Title }}</a>
+              <a class="f5 gray dib link mb2 tracked blood" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+              <span class="gray f5">&middot;</span>
+              <time class="f5 gray">{{ .Lastmod.Format "Jan 2, 2006" }}</time>
+              <!-- <div class="mw4 mv2 bw1 bt b--blood"></div> -->
+              <!-- <p class="f6 lh-copy lato mid-gray">
+                {{ .Params.subtitle }}
+              </p> -->
+              <!-- <div class="dt w-100 mv2" href="#0">
+                <div class="dtc w2 v-mid">
+                  <img src="/images/art.jpg" class="db br-100 w2 h2"/>
+                </div>
+                <div class="dtc v-mid pl2">
+                  <span class="f6 mt0 mb0">Тимур Охипко</h2>
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+<section class="subscribe bb b--blood bw1">
+  <form class="mw7 center pa4">
+    <fieldset class="cf bn ma0 pa0">
+      <legend class="mb3 lh-title">
+        <span class="f3 f2-ns near-black db">Еженедельная рассылка</span>
+        <span class="near-black">Дайджест недели и эксклюзивные материалы только для подписчиков</span>
+      </legend>
+      <div class="cf">
+        <label class="clip" for="email-address">Email Address</label>
+        <input class="f6 f5-l input-reset fl bg-snow pa3 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns ba b--blood" placeholder="Ваш email" type="text" name="email-address" value="" id="email-address">
+        <input class="f6 f5-l button-reset fl pv3 tc bn bg-blood snow pointer w-100 w-25-m w-20-l br2-ns br--right-ns" type="submit" value="Подписаться">
+      </div>
+    </fieldset>
+  </form>
+</section>
+<!-- <section class="bg-light-gray">
+  <div class="mw7 center">
+    <div class="w-100">
+      <p class="f2 dib lh-solid mh3 pv3 bb bw1 b--blood">Новое</p>
+      {{ range (.Paginator 5).Pages }}
+        {{ partial "article-list-item.html" . }}
+      {{ end }}
+    </div>
+  </div>
+</section> -->
+
+
+<!-- <section class="bg-snow cf">
+  <div class="mws center">
+    <div class="w-100 cf"> -->
+      <!-- <p class="f2 dib lh-solid mh3 pv3 mb0 bb bw1 b--blood">Новое</p> -->
+      <!-- {{ range (.Paginator 5).Pages }}
+        <article class="ph2 ph0-ns pv4 bb bw1 b--light-gray">
+          <div class="flex flex-column flex-row-ns">
+            <div class="mb4 mb0-ns w-100 w-30-ns">
+              <img src="/images/scr1.jpg" class="db" alt="Photo of a dimly lit room with a computer interface terminal.">
+            </div>
+            <div class="w-100 w-70-ns ph3">
+              <div>
+                <a class="f6 db gray dib link ttu blood b lato-bold mb2" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+                  &middot;
+                <time class="f6 db gray dib">{{ .Lastmod.Format "Mon, Jan 2, 2006" }}</time>
+              </div>
+              <a class="f3 db lh-title lato-bold near-black link" href="{{ .Permalink }}">{{ .Title }}</a>
+              <p class="f4 lh-copy lato-reg mid-gray measure">
+                {{ .Params.subtitle }}
+              </p>
+            </div>
+          </div>
+        </article>
+      {{ end }} -->
+      <!-- <article class="cover bg-left bg-center-l" style="background-image: url(/images/scr1.jpg)">
+        <div class="bg-black-60 pb5 pb6-m pv5-l">
+          <div class="ph4">
+            <a class="f6 dib mv2 link ttu lato-bold blood" href="/feature/">Feature</a>
+            <h1 class="db f3 f1-l lh-title mt0 lato-bold link snow">This is your super impressive headline</h1>
+            <h2 class="fw1 f3 snow lh-copy mb4 measure">Now a subheadline where explain your wonderful new startup even more</h2>
+          </div>
+        </div>
+      </article>  -->
+      <!-- <article class="ph2 ph0-ns pv4">
+        <div class="aspect-ratio aspect-ratio--2x1-ns aspect-ratio aspect-ratio--4x3">
+          <div class="aspect-ratio--object cover" style="background:url(/images/scr1.jpg) center;">
+            <div class="bg-near-black o-50 relative h-100 cf">
+            </div>
+            <div class="absolute dt h-100 w-100 top-0 tc">
+              <div class="dtc v-mid">
+                <a class="f6 dib mv2 link ttu lato-bold blood" href="/feature/">Feature</a>
+                <a href="#" class="db f3 f1-l lh-title mt0 lato-bold link snow ph4">2017: Самые ожидаемые премьеры декабря</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article> -->
+      <!-- <div class="tc pa4">
+        <a href="#" class="f5 link bg-animate snow pa3 ba border-box mr4 bg-violet">
+          <span class="pl1">Все материалы</span>
+        </a>
+      </div> -->
+    <!-- </div> -->
+    <!-- <div class="fl w-40-ns w-100">
+      <p class="f2 dib l  h-solid mh3 pv3 mb0 bb bw1 b--blood">Популярное за неделю</p>
+      <ol class="bl-ns bw1 b--light-gray">
+        {{ range first 5 (where .Data.Pages "Section" "roundup") }}
+          <li class="ph2 mv4">
+            <div class="flex flex-column flex-row-ns">
+              <div class="w-100">
+                <a class="f6 db gray dib link ttu blood b lato-bold mv2" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+                &middot;
+                <time class="f6 db dib">{{ .Lastmod.Format "Mon, Jan 2, 2006" }}</time>
+                <a class="f4 db mt0 lh-title lato-bold link near-black" href="{{ .Permalink }}">{{ .Title }}</a>
+              </div>
+            </div>
+          </article>
+        {{ end }}
+      </ol>
+      <p class="f2 dib l  h-solid mh3 pv3 mb0 bb bw1 b--blood">Авторы</p>
+      <ul class="bl-ns bw1 b--light-gray">
+        {{ range .Site.Author }}
+          <li class="ph2 mv4">
+            <div class="flex flex-column flex-row-ns">
+              <div class="w-100">
+                <a class="f4 db mt0 lh-title lato-bold link near-black" href="{{ .Permalink }}">{{ .name }}</a>
+              </div>
+            </div>
+          </article>
+        {{ end }}
+      </ol>
+    </div> -->
+<!--   </div>
+</section> -->
+
+<!-- <section class="bg-snow">
+  <div class="mws center pb4">
+    <div class="w-100 w-60-ns">
+      <p class="f2 dib lh-solid mh3 pv3 bb bw1 b--blood">Последние 
+        <a class="link blood" href="/roundup/">раундапы</a>
+      </p>
+    </div>
+    <div class="flex-ns content-stretch ph3 pt3 bg-snow">
+      <div class="w-100 w-50-l bg-snow">
+        {{ range first 1 ((where .Site.RegularPages "Section" "feature").ByPublishDate.Reverse) }}
+          <div class="w-100">
+            <div class="aspect-ratio aspect-ratio--16x9">
+              <div class="aspect-ratio--object cover" style="background:url(/images/thumbs/960x480-{{ .Params.image }}) center;"></div>
+            </div>
+            <div class="mt4 ph3 pb3">
+              <a class="f2-ns f3 db mb1 lh-title b link near-black" href="{{ .Permalink }}">{{ .Title }}</a>
+              <a class="f5 b dib link mb2 tracked blood" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+              <span class="f5 gray">&middot;</span>
+              <time class="f5 gray">{{ .Lastmod.Format "Jan 2, 2006" }}</time>
+              <div class="mw4 mv2 bw1 bt b--blood"></div>
+            </div>
+          </div>
+        {{ end }}
+      </div> -->
+          <!-- <section class="h-100 flex cover bg-center items-end justify-center" style="background-image: url(/images/{{ .Params.image }});">
+            <div class="snow w-100 h-100 bg-black-40 flex items-end">
+              <div class="pt3 pb6-ns pb2 ph3">
+                <a class="f1 tc db lh-title sand link" href="{{ .Permalink }}">
+                  <span class="pa1" style="text-shadow: 1px 1px 2px #000;">
+                    {{ .Title }}
+                  </span>
+                </h1>
+                <div class="tc f4 near-snow mt2">
+                  <a class="dib link mb2 tracked blood" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+                  <span>/</span>
+                  <time>{{ .Lastmod.Format "Jan 2, 2006" }}</time>
+                  <div class="center mw4 mv2 bw1 bt b--blood"></div>
+                </div>
+                <p class="f4 lh-copy lato silver">
+                  {{ .Params.subtitle }}
+                </p>
+              </div>
+            </div>
+          </section> -->
+<!--       <div class="w-100 w-50-l pl4-ns">
+        {{ range first 4 (after 1 (where .Site.RegularPages "Section" "roundup")) }}
+          <article class="pl2-ns pr3-ns pv3 pv0-ns mb4-ns">
+            <a class="f4 db mb1 lh-title b link near-black" href="{{ .Permalink }}">{{ .Title }}</a>
+            <a class="f5 dib b link mb2 tracked blood" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+            <span class="gray f5">&middot;</span>
+            <time class="gray f5">{{ .Lastmod.Format "Jan 2, 2006" }}</time>
+            <div class="mw4 mv2 bw1 bt b--blood"></div>
+          </article>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section> -->
+          <!-- <article class="pl2 pr3 mb3">
+            <div class="flex flex-column flex-row-ns">
+              <div class="w-100">
+                <time class="f6 db dib">{{ .Lastmod.Format "Jan 2, 2006" }}</time>
+                &middot;
+                <a class="f6 db gray dib link ttu blood b lato-bold mv2" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+                <a class="f3 db mt0 mb4 lh-title lato-bold link near-black" href="{{ .Permalink }}">{{ .Title }}</a>
+              </div>
+            </div>
+          </article> -->
+        <!-- <div class="tc mb4">
+          <a href="#" class="f6 link f5-l button-reset pv3 ph4 tc bn bg-violet snow pointer">Все раундапы</a>
+        </div> -->
+<section class="bg-white">
+  <div class="mws center pb4">
+    <div class="w-100 w-60-ns">
+      <p class="f2 dib lh-solid mh3 pv3 bb bw1 b--blood">Сериал недели: 
+        <a class="link blood b" href="/roundup/">Westworld</a>
+      </p>
+    </div>
+    <div class="flex-ns content-stretch ph3 pt3">
+      <div class="w-100 w-50-l">
+        <div class="aspect-ratio pt4 overflow-hidden" style="padding-bottom: 54%;">
+          <iframe src="//www.youtube.com/embed/2K-qzhUPhzQ" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" allowfullscreen="" frameborder="0"></iframe>
+        </div>
+        <p class="f3 mb0">Трейлер второго сезона Westworld</p>
+        <p class="f6 mt2 gray tracked mb2">Mar 13, 2018</p>
+      </div>
+      <div class="w-100 w-50-l pl4-ns">
+        {{ range first 4 (after 1 (where .Site.RegularPages "Section" "roundup")) }}
+          <article class="pl2-ns pr3-ns pv3 pv0-ns mb4-ns">
+            <a class="f4 db mb1 lh-title b link near-black" href="{{ .Permalink }}">{{ .Title }}</a>
+            <a class="f5 gray dib link mb2 tracked blood" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+            <span class="gray f5">/</span>
+            <time class="f5 gray">{{ .Lastmod.Format "Jan 2, 2006" }}</time>
+            <div class="mw4 mv2 bw1 bt b--blood"></div>
+          </article>
+          <!-- <article class="pl2 pr3 mb3">
+            <div class="flex flex-column flex-row-ns">
+              <div class="w-100">
+                <time class="f6 db dib">{{ .Lastmod.Format "Jan 2, 2006" }}</time>
+                &middot;
+                <a class="f6 db gray dib link ttu blood b lato-bold mv2" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+                <a class="f3 db mt0 mb4 lh-title lato-bold link near-black" href="{{ .Permalink }}">{{ .Title }}</a>
+              </div>
+            </div>
+          </article> -->
+        {{ end }}
+        <!-- <div class="tc mb4">
+          <a href="#" class="f6 link f5-l button-reset pv3 ph4 tc bn bg-violet snow pointer">Все раундапы</a>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</section>
+<section class="cf bg-snow pb4 bt bw1 b--blood">
+  <div class="mws center pt4-l">
+    <div class="mr4 mb4 ml4">
+      <p class="f2 lh-solid pa3 ph0-l tc near-black mv0">Премьеры недели</p>
+    </div>
+  </div>
+  <div class="mws center br4 pa4">
+    {{ range $.Site.Data.schedule }}
+      {{ partial "schedule" . }}
+    {{ end }}    
+  </div>
+</section>
+<!-- <section class="mws center bw2">
+  <div class="cf pa3 pa4-m pv4-l center flex flex-row-ns flex-column items-stretch">
+    <div class="w-100 w-50-l">
+      <div class="pv2">
+        <div class="aspect-ratio aspect-ratio--1x1">
+          <div class="aspect-ratio--object cover" style="background:url(/images/scr7.jpg) center;">
+            <div class="bg-near-black o-50 relative h-100 cf">
+            </div>
+            <div class="absolute bottom-0 pa2 pa4-l">
+              <a class="f6 db mv2 link ttu lato-bold blood" href="/feature/">Feature</a>
+              <a href="#" class="db f3 f2-l lh-title mt0 lato-bold link snow">2017: Самые ожидаемые премьеры декабря</a>
+              <p class="f4-ns f5 lato-reg snow">During low tides, a powerful turbine water pump, built inside a cave at sea level, could be switched on from a control room and could fill the tanks at a rate of 6,000 US gallons a minute, recycling all loodthe water in five hours.</p>
+            </div>
+          </div>
+        </div>      
+      </div>
+    </div>
+    <div class="w-100 w-50-l">
+      <div class="pl2 pt2 w-100">
+        <div class="h-50">
+          <div class="aspect-ratio aspect-ratio--2x1-ns aspect-ratio--1x1">
+            <div class="aspect-ratio--object cover" style="background:url(/images/scr1.jpg) center;">
+              <div class="bg-near-black o-50 relative h-100 cf">
+              </div>
+              <div class="absolute bottom-0 pa2 pa4-l">
+                <a class="f6 db mv2 link ttu lato-bold blood" href="/feature/">Feature</a>
+                <a href="#" class="db f3 lh-title mt0 lato-bold link snow">2017: Самые ожидаемые премьеры декабря</a>
+                <p class="f5 lato-reg snow">During low tides, a powerful turbine water pump, built inside a cave at sea level, could be switched on from a control room and could fill the tanks at a rate of 6,000 US gallons a minute, recycling all the water in five hours.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pl2 pt2 w-100">
+        <div class="h-50">
+          <div class="aspect-ratio aspect-ratio--2x1-ns aspect-ratio--1x1">
+            <div class="aspect-ratio--object cover" style="background:url(/images/scr1.jpg) center;">
+              <div class="bg-near-black o-50 relative h-100 cf">
+              </div>
+              <div class="absolute bottom-0 pa2 pa4-l">
+                <a class="f6 db mv2 link ttu lato-bold blood" href="/feature/">Feature</a>
+                <a href="#" class="db f2-ns f3 lh-title mt0 lato-bold link snow">2017: Самые ожидаемые премьеры декабря</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+<!-- <section>
+  <div class="bg-snow">
+    <div class="mws center">
+      <div class="cf center">
+        <p class="f2 dib lh-solid mh3 pv3 mb0 bb bw1 b--blood">
+          <span class="di">Самое главное о </span>
+          <a href="" class="di violet link">Fargo</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="mws center">
+    <div class="cf pa3 pa4-m pv4-l center flex flex-row items-stretch-ns">
+      <div class="w-100 w-50-l pv2">
+        <div class="aspect-ratio aspect-ratio--8x5-ns aspect-ratio aspect-ratio--4x3">
+          <div class="aspect-ratio--object cover" style="background:url(/images/scr1.jpg) center;">
+            <div class="bg-near-black o-50 relative h-100 cf">
+            </div>
+            <div class="absolute dt h-100 w-100 top-0 tc">
+              <div class="dtc v-mid">
+                <a class="f6 dib mv2 link ttu lato-bold blood" href="/feature/">Feature</a>
+                <a href="#" class="db f3 f2-l lh-title mt0 lato-bold link snow ph4">2017: Самые ожидаемые премьеры декабря</a> -->
+                <!-- <p class="f5 lato-reg snow">During low tides, a powerful turbine water pump, built inside a cave at sea level, could be switched on from a control room and could fill the tanks at a rate of 6,000 US gallons a minute, recycling all the water in five hours.</p> -->
+<!--               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="w-100 w-50-l">
+        {{ range first 2 (.Site.RegularPages) }}
+          <article class="pl3-ns pv2 h-50 flex flex-column flex-row-ns ">
+            <div class="w-60 pl4-ns ">
+              <a class="f6 db gray dib link ttu blood b lato-bold mv2" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+              &middot;
+              <time class="f6 db dib">{{ .Lastmod.Format "Mon, Jan 2, 2006" }}</time>
+              <a class="f3 db mt0 mb2 lh-title lato-bold link near-black" href="{{ .Permalink }}">{{ .Title }}</a> -->
+              <!-- <p class="f5 lh-copy lato-reg mid-gray">
+                {{ .Params.subtitle }}
+              </p> -->
+<!--             </div>
+            <div class="pr3-ns w-100 w-40-ns">
+              <div class="relative h-100 aspect-ratio">
+                <div class="aspect-ratio--object cover" style="background:url(/images/art.jpg) center;">
+                </div>
+              </div>
+            </div>
+          </article>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+<section class="bg-snow">
+  <div class="mws center">
+    <div class="cf center">
+      <p class="f2 dib lh-solid mh3 pv3 mb0 bb bw1 b--blood">
+        <span class="di">Перед премьерой </span>
+        <a href="" class="di violet link">Westworld</a>
+      </p>
+    </div>
+    <div class="cf pa3 pa4-m pv4-l center flex items-stretch-ns">
+      <div class="fl w-100 w-50-l pv2">
+        <div class="aspect-ratio pt4 overflow-hidden" style="padding-bottom: 54%;">
+          <iframe src="//www.youtube.com/embed/2K-qzhUPhzQ" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" allowfullscreen="" frameborder="0"></iframe>
+        </div>
+      </div>
+      <div class="fl w-100 w-50-l">
+        {{ range first 2 (.Site.RegularPages) }}
+          <article class="pl3-ns pv2 h-50 flex flex-column flex-row-ns ">
+            <div class="w-60 pl4-ns ">
+              <a class="f6 db gray dib link ttu blood b lato-bold mv2" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+              &middot;
+              <time class="f6 db dib">{{ .Lastmod.Format "Mon, Jan 2, 2006" }}</time>
+              <a class="f3 db mt0 mb2 lh-title lato-bold link near-black" href="{{ .Permalink }}">{{ .Title }}</a> -->
+              <!-- <p class="f5 lh-copy lato-reg mid-gray">
+                {{ .Params.subtitle }}
+              </p> -->
+<!--             </div>
+            <div class="pr3-ns w-100 w-40-ns">
+              <div class="relative h-100 aspect-ratio">
+                <div class="aspect-ratio--object cover" style="background:url(/images/art.jpg) center;">
+                </div>
+              </div>
+            </div>
+          </article>
+        {{ end }} -->
+        <!-- {{ range first 3 (.Site.Pages) }}
+          <article class="pl4 h-33">
+            <div class="flex flex-column flex-row-ns">
+              <div class="pv2 w-40">
+                <div class="cover h-100" style="background-image: url('/images/scr7.jpg') ">
+              </div>
+              </div>
+              <div class="w-60 pl3-ns">
+                <a class="f6 db gray dib link ttu blood b lato-bold mv2" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+                &middot;
+                <time class="f6 db dib">{{ .Lastmod.Format "Mon, Jan 2, 2006" }}</time>
+                <a class="f3 db mt0 mb4 lh-title lato-bold link near-black" href="{{ .Permalink }}">{{ .Title }}</a>
+              </div>
+            </div>
+          </article>
+        {{ end }} -->
+<!--       </div>
+    </div>
+    <div class="tc pv4">
+      <a href="#" class="f6 link f5-l button-reset pv3 ph4 tc bn bg-violet pointer">Все о сериале</a>
+    </div>
+  </div>
+</section> -->
+<section class="bg-dark-violet snow">
+  <div class="mws center cf pv4-l">
+    <div class="mr4 mb4 ml4">
+      <p class="f2 lh-solid pa3 ph0-l tc lh-solid mv0">Видео дня</p>
+    </div>
+    <div class="w-100 flex flex-row-l flex-column items-stretch-l">
+      {{ range first 3 (.Site.RegularPages) }}
+        <div class="fl w-100 w-33-l ph4">
+          <div class="aspect-ratio aspect-ratio--6x4 mb2 yt-thumb" data-yt="2K-qzhUPhzQ" caption="Трейлер второго сезона Westworld">
+            <div class="aspect-ratio--object cover bg-black o-75" style="background:url(//img.youtube.com/vi/2K-qzhUPhzQ/hqdefault.jpg) center;">
+            </div>
+            <div class="z-999 absolute flex justify-center items-center w-100 h-100">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                <path d="M10 30 L26 16 10 2 Z" />
+              </svg>
+            </div>
+          </div>
+          <a class="f6 db gray dib link ttu blood b lato-bold mb2" href="#">HBO</a>
+          <a class="snow f3 db lh-title lato-bold link near-black" href="#">Трейлер второго сезона Westworld</a>
+          <p class="f5 lh-copy lato-reg light-gray measure">
+            Долгожданные первые официальные кадры грандиозной фантастики от HBO, впервые представленные в рекламном блоке на трансляции Super Bowl
+          </p>
+        </div>
+      {{ end }}    
+    </div>
+    <div class="cf pa3 pa4-m center flex flex-row items-stretch-ns">
+      <div class="w-100 w-50-l pv2">
+        <div class="ph0">
+          <div class="aspect-ratio aspect-ratio--16x9">
+            <div class="aspect-ratio--object cover" style="background:url(/images/scr7.jpg) center;"></div>
+          </div>
+          <div>
+            <a class="f6 db gray dib link ttu blood b lato-bold mv2" href="#">HBO</a>
+            <a class="snow f3 db lh-title lato-bold link near-black" href="#">Трейлер второго сезона Westworld</a>
+            <p class="f5 lh-copy lato-reg silver measure">
+              Долгожданные первые официальные кадры грандиозной фантастики от HBO, впервые представленные в рекламном блоке на трансляции Super Bowl
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="w-100 w-50-l">
+        {{ range first 2 (.Site.Pages) }}
+          <article class="pl3-ns pv2 h-50 flex flex-column flex-row-ns">
+            <div class="w-100 w-50-l pl4-ns ">
+              <div class="aspect-ratio aspect-ratio--16x9">
+                <div class="aspect-ratio--object cover" style="background:url(/images/ww.png) center;"></div>
+              </div>
+              <div>
+                <a class="f6 db gray dib link ttu blood b lato-bold mv2" href="#">Netflix</a>
+                <a class="snow f5 db lh-title lato-bold link near-black" href="#">Трейлер второго сезона Westworld</a>
+              </div>
+            </div>
+            <div class="w-100 w-50-l pl4-ns ">
+              <div class="aspect-ratio aspect-ratio--16x9">
+                <div class="aspect-ratio--object cover" style="background:url(/images/scr1.jpg) center;"></div>
+              </div>
+              <div>
+                <a class="f6 db gray dib link ttu blood b lato-bold mv2" href="#">BBC One</a>
+                <a class="snow f5 db lh-title lato-bold link near-black" href="#">Трейлер Детективного агентства Дирка Джентли от BBC Two</a>
+              </div>
+            </div>
+          </article>
+        {{ end }}
+      </div>
+    </div>
+</div>
+</section>
+<!--   <section>
+  <div class="bg-snow">
+    <div class="mws center">
+      <div class="cf center">
+        <p class="f2 dib lh-solid mh3 pv3 mb0 bb bw1 b--blood">Популярное</p>
+      </div>
+    </div>
+  </div>
+  <div class="bg-light-violet">
+    <div class="mws center pv4">
+      <div class="cf center">
+        <div class="fl w-100 w-50-l ph3 pb4">
+          <div class="aspect-ratio aspect-ratio--8x5-ns aspect-ratio aspect-ratio--3x4">
+            <div class="aspect-ratio--object cover" style="background:url(/images/scr1.jpg) center;">
+              <div class="bg-black o-50 relative h-100 cf">
+              </div>
+              <div class="absolute bottom-0 pa2 pa4-l">
+                <a class="f6 db mv2 link ttu lato-bold blood" href="/feature/">Feature</a>
+                <a href="#" class="dib f3 lh-title mt0 lato-bold link snow w-80">2017: Самые ожидаемые премьеры декабря</a>
+                <p class="f5 lato-reg snow measure mb0">During low tides, a powerful turbine water pump, built inside a cave at sea level, could be switched on from a control room and could fill the tanks at a rate of 6,000 US gallons a minute, recycling all the water in five hours.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="fl w-100 w-50-l ph3 pb4">
+          <div class="aspect-ratio aspect-ratio--8x5-ns aspect-ratio aspect-ratio--3x4">
+            <div class="aspect-ratio--object cover" style="background:url(/images/scr1.jpg) center;">
+              <div class="bg-near-black o-50 relative h-100 cf">
+              </div>
+              <div class="absolute bottom-0 pa2 pa4-l">
+                <a class="f6 db mv2 link ttu lato-bold blood" href="/feature/">Feature</a>
+                <a href="#" class="dib f3 lh-title mt0 lato-bold link snow w-80">2017: Самые ожидаемые премьеры декабря</a>
+                <p class="f5 lato-reg snow measure mb0">During low tides, a powerful turbine water pump, built inside a cave at sea level, could be switched on from a control room and could fill the tanks at a rate of 6,000 US gallons a minute, recycling all the water in five hours.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="w-100 flex flex-row-l flex-column items-stretch-l">
+          {{ range first 3 (.Site.RegularPages) }}
+            <div class="w-100 w-33-l">
+              <div class="ph3">
+                <div class="ba bw1 b--light-gray bg-snow">
+                  <div class="aspect-ratio aspect-ratio--16x9">
+                    <div class="aspect-ratio--object cover" style="background:url(/images/scr7.jpg) center;"></div>
+                  </div>
+                  <div class="ph3"> -->
+                    <!-- <img src="holder.js/480x200" class="db w-100" alt="" /> -->
+<!--                     <a class="f6 db gray dib link ttu blood b lato-bold mv2" href="/{{ .Section | urlize }}/">{{ .Section }}</a>
+                    &middot;
+                    <time class="f6 dib gray">{{ .Lastmod.Format "Mon, Jan 2, 2006" }}</time>
+                    <a class="f3 db mt0 lh-title lato-bold link near-black" href="{{ .Permalink }}">{{ .Title }}</a>
+                    <p class="f5 lh-copy lato-reg mid-gray">
+                      {{ .Params.subtitle }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {{ end }}    
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+{{ partial "footer.html" . }}
